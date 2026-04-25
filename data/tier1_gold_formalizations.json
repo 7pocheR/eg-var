@@ -1,0 +1,2513 @@
+[
+  {
+    "table_id": "03ef349b3920a798e7c9e3b44589d702",
+    "question": "How many teams have a win percentage of 0.7 or higher?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"win pct\" (Cond.propGte \"win pct\" (Value.rat (mkRat 7 10))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "win pct",
+        "condition": {
+          "op": "gte",
+          "property": "win pct",
+          "value": 0.7
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "042e0ea557cc503992dd7e6fd9630480",
+    "question": "What is the total 2010 population (in thousands) of the top 5 districts with the highest GDP per capita?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (TopKSumByWhere \"2010 population (000)\" \"2008 gdp per capita (usd) a\" 5 Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "topk_sum_by",
+        "column": "2010 population (000)",
+        "rank_by": "2008 gdp per capita (usd) a",
+        "n": 5
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "047443783007a597076b5c7abb63cd53",
+    "question": "Which country has the highest average relative annual growth (%) in population?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"average relative annual growth (%)\" (Cond.propLte \"rank\" (Value.rat (mkRat 22 1))) e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "average relative annual growth (%)",
+        "identity_column": "country (or dependent territory)",
+        "condition": {
+          "op": "lte",
+          "property": "rank",
+          "value": 22
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"oman\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "0595618d0746974966d38bb82fc99faf",
+    "question": "What is the average rating of episodes that have a viewership of at least 10 million and are ranked within the top 3 in their timeslot?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"rating\" (Cond.and (Cond.propGte \"viewers (m)\" (Value.rat (mkRat 10 1))) (Cond.propLte \"timeslot rank\" (Value.rat (mkRat 3 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "rating",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gte",
+            "property": "viewers (m)",
+            "value": 10
+          },
+          "right": {
+            "op": "lte",
+            "property": "timeslot rank",
+            "value": 3
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "0a53ffc65168d29f6a0784ec6741ffb0",
+    "question": "How many diesel cars are listed in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"fuel type\" (Cond.propEq \"fuel type\" (Value.str \"diesel\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "Fuel Type",
+        "condition": {
+          "op": "eq",
+          "property": "Fuel Type",
+          "value": "diesel"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "0a593de4b82e18d255d786e3fee0d85f",
+    "question": "Which episode had the lowest number of US viewers (in millions)?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgminWhere \"us viewers (millions)\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmin",
+        "column": "us viewers (millions)",
+        "entity_column": "title"
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"long live the queen\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "0cb2dc3734b6343b4e1c97761f1fbb03",
+    "question": "What is the average quantity of buses in 2000-2007 period?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"quantity\" (Cond.and (Cond.propGte \"year\" (Value.rat (mkRat 2000 1))) (Cond.propLte \"year\" (Value.rat (mkRat 2007 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "quantity",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gte",
+            "property": "year",
+            "value": 2000
+          },
+          "right": {
+            "op": "lte",
+            "property": "year",
+            "value": 2007
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "1274eebbc02e9c74547f94c43fbd5cdb",
+    "question": "What is the total population of the top 5 cities in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (TopKSumWhere \"population\" 5 Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "topk_sum",
+        "column": "population",
+        "n": 5
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "1aad7f91605843765c973d07d7f8c341",
+    "question": "How many songs are in the French language?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"language\" (Cond.propEq \"language\" (Value.str \"french\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "language",
+        "condition": {
+          "op": "eq",
+          "property": "language",
+          "value": "french"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "1c2ac440f5591f15c8ff60fe1644335a",
+    "question": "What is the average number of tropical storms per year from 1850 to 1855?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"number of tropical storms\" (Cond.and (Cond.propGte \"year\" (Value.rat (mkRat 1850 1))) (Cond.propLte \"year\" (Value.rat (mkRat 1855 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "number of tropical storms",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gte",
+            "property": "year",
+            "value": 1850
+          },
+          "right": {
+            "op": "lte",
+            "property": "year",
+            "value": 1855
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "1e0891ff9db2d97d00d2b1f5d12142cd",
+    "question": "What is the average value of the \"Pin (Tip)\" column?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"pin (tip)\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "Pin (Tip)"
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "1feeafc0b774633c4b7070d7295d0b2a",
+    "question": "What is the average number of podiums achieved by a team in a single season?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"podiums\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "podiums",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "1ff37e4c567cfe5f66c6db366400f737",
+    "question": "Which time has the lowest local magnitude?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), PProd (Evidence Grade.Verified (MinWhere \"local magnitude\" Cond.all v)) (Evidence Grade.Verified (HasProperty e \"local magnitude\" v))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "min",
+        "column": "local magnitude",
+        "condition": {
+          "op": "all"
+        }
+      },
+      {
+        "action": "lookup",
+        "entity": "27 november 1954",
+        "property": "local magnitude"
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"27 november 1954\", obs0_val, obs0_l2, ?_⟩\nhave h : obs0_val = obs1_val := by native_decide\nrw [h]\nexact obs1_l2"
+  },
+  {
+    "table_id": "20f1697077ffa4073a621235d1da13c6",
+    "question": "Which crater has the largest diameter?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"diameter (km)\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "diameter (km)",
+        "identity_column": "name",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"cleopatra\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "2438086f1b3d0cb3f63d46f4c9eb8dbf",
+    "question": "What is the total elevation of all mountains in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"elevation (m)\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "elevation (m)",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "260a34f57017a544911195cfb1908186",
+    "question": "Which institution has the highest enrollment?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"enrollment\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "enrollment",
+        "identity_column": "institution",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"southern oregon university\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "2883b5cdde8c423fe83ae9741807b51a",
+    "question": "How many craters are there with a diameter (km) larger than 33?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"diameter (km)\" (Cond.propGt \"diameter (km)\" (Value.rat (mkRat 33 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "diameter (km)",
+        "condition": {
+          "op": "gt",
+          "property": "diameter (km)",
+          "value": 33
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "29c36dbc873ed833d3fdc8c19375453b",
+    "question": "How much larger is the area of the \"remainder of the municipality\" compared to the area of \"ladysmith\"?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (HasProperty \"remainder of the municipality\" \"area (km 2 )\" a)) (PProd (Evidence Grade.Verified (HasProperty \"ladysmith\" \"area (km 2 )\" b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "lookup",
+        "entity": "remainder of the municipality",
+        "property": "area (km 2 )"
+      },
+      {
+        "action": "lookup",
+        "entity": "ladysmith",
+        "property": "area (km 2 )"
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 225875 100), obs0_val, obs1_val, ?_⟩\nexact PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up (by native_decide)))"
+  },
+  {
+    "table_id": "2cc3663accdc89ab60ba15c630072e4b",
+    "question": "What is the average number of floors in buildings constructed between 1960 and 1980?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"floors\" (Cond.and (Cond.propGte \"year\" (Value.rat (mkRat 1960 1))) (Cond.propLte \"year\" (Value.rat (mkRat 1980 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "floors",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gte",
+            "property": "year",
+            "value": 1960
+          },
+          "right": {
+            "op": "lte",
+            "property": "year",
+            "value": 1980
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "2e09024d7ebcee21c3bd33ae5f07e020",
+    "question": "How much greater is the average annual rainfall in the 'v - valparaíso' region compared to the 'ii - antofagasta' region?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (MeanWhere \"average annual rainfall (mm)\" (Cond.propEq \"administrative region\" (Value.str \"v - valparaíso\")) a)) (PProd (Evidence Grade.Verified (MeanWhere \"average annual rainfall (mm)\" (Cond.propEq \"administrative region\" (Value.str \"ii - antofagasta\")) b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "average annual rainfall (mm)",
+        "condition": {
+          "op": "eq",
+          "property": "administrative region",
+          "value": "v - valparaíso"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "average annual rainfall (mm)",
+        "condition": {
+          "op": "eq",
+          "property": "administrative region",
+          "value": "ii - antofagasta"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 3895 10), obs0_val, obs1_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up ?_))\nnative_decide"
+  },
+  {
+    "table_id": "3642133c0b09a25ffa48bd6356c3a58d",
+    "question": "What is the total population of regions in Italy that have an area greater than 20000 square kilometers?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"population\" (Cond.propGt \"area (km square)\" (Value.rat (mkRat 20000 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "population",
+        "condition": {
+          "op": "gt",
+          "property": "area (km square)",
+          "value": 20000
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "38f99d0e172d93c9772406669a71d12e",
+    "question": "Which place had the highest number of Prisoners of War (PoW)?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"pow\" (Cond.not (Cond.propEq \"place\" (Value.str \"Total\"))) e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "PoW",
+        "identity_column": "Place",
+        "condition": {
+          "op": "not",
+          "inner": {
+            "op": "eq",
+            "property": "Place",
+            "value": "Total"
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"Bardia\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "39c3b24be6bcb3e279ecccea6b641efc",
+    "question": "What is the total GDP (nominal) of all countries with a UN budget greater than 2%?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"gdp (nominal) (millions of usd) 2011\" (Cond.propGt \"un budget\" (Value.rat (mkRat 2 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "gdp (nominal) (millions of usd) 2011",
+        "condition": {
+          "op": "gt",
+          "property": "un budget",
+          "value": 2
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "3b25f146ef2692abc071056934ba47e7",
+    "question": "How many countries have a population of over 50 million according to the 2013 projection?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"july 1 , 2013 projection\" (Cond.propGt \"july 1 , 2013 projection\" (Value.rat (mkRat 50000000 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "july 1 , 2013 projection",
+        "condition": {
+          "op": "gt",
+          "property": "july 1 , 2013 projection",
+          "value": 50000000
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "3ba617b11797d522d5c51bdb6d6cd313",
+    "question": "What is the total population of all regions in China where the percentage of Manchu population is greater than 5%?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"total population\" (Cond.propGt \"percentage in manchu population\" (Value.rat (mkRat 5 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "total population",
+        "condition": {
+          "op": "gt",
+          "property": "percentage in manchu population",
+          "value": 5
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "3ca51f974a30120a84a22b6e72b818ba",
+    "question": "What is the average number of points received by the singers in this competition?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"points\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "points",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "3e1a5d8854ccc78754eb3badc950a684",
+    "question": "What is the average percentage of votes for the Progressive Conservative party across all polling firms and dates?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"progressive conservative\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "progressive conservative",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "432da69c8bf6e4c02ea05c70a4369a81",
+    "question": "What is the difference between the upper index kcal/nm³ of propane and the lower index kcal/nm³ of propane?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (MaxWhere \"upper index kcal / nm 3\" (Cond.propEq \"fuel gas\" (Value.str \"propane\")) a)) (PProd (Evidence Grade.Verified (MinWhere \"lower index kcal / nm 3\" (Cond.propEq \"fuel gas\" (Value.str \"propane\")) b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "max",
+        "column": "upper index kcal / nm 3",
+        "condition": {
+          "op": "eq",
+          "property": "fuel gas",
+          "value": "propane"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "min",
+        "column": "lower index kcal / nm 3",
+        "condition": {
+          "op": "eq",
+          "property": "fuel gas",
+          "value": "propane"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 1559 1), obs0_val, obs1_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up ?_))\nnative_decide"
+  },
+  {
+    "table_id": "439db62b2f229dcaeb0119cc11f4ab08",
+    "question": "What is the average US Chart position of songs released by the artist from 1942 to 1946?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"us chart position\" (Cond.and (Cond.propGte \"year\" (Value.rat (mkRat 1942 1))) (Cond.propLte \"year\" (Value.rat (mkRat 1946 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "US Chart position",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gte",
+            "property": "Year",
+            "value": 1942
+          },
+          "right": {
+            "op": "lte",
+            "property": "Year",
+            "value": 1946
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "4b4ff8f17963fa7ba3edd5cae2c32abb",
+    "question": "What is the total number of wins by teams that have a win percentage greater than 0.7?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"wins\" (Cond.propGt \"win pct\" (Value.rat (mkRat 7 10))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "wins",
+        "condition": {
+          "op": "gt",
+          "property": "win pct",
+          "value": 0.7
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "4cc489011d65d97a1a1c269bbcdd112d",
+    "question": "How many hand combinations have a payout of 100 or more for 1 credit?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"1 credit\" (Cond.propGte \"1 credit\" (Value.rat (mkRat 100 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "1 credit",
+        "condition": {
+          "op": "gte",
+          "property": "1 credit",
+          "value": 100
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "4f0c48014d19beeb80048111efe5b532",
+    "question": "Which make and model of buses has the highest quantity?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"quantity\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "quantity",
+        "identity_column": "make and model",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"orion bus industries v\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "4f1d765413de5719e856a8856cbea802",
+    "question": "How many players have scored more than 3 goals in total?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"total goals\" (Cond.propGt \"total goals\" (Value.rat (mkRat 3 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "total goals",
+        "condition": {
+          "op": "gt",
+          "property": "total goals",
+          "value": 3
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "4fbaad0b3bacf8c4a5741ff081c032c4",
+    "question": "How much greater is the total number of executions (in persona and in effigie) in Córdoba compared to Valencia?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a1 : Value), Σ (a2 : Value), Σ (b1 : Value), Σ (b2 : Value), PProd (Evidence Grade.Verified (SumWhere \"executions in persona\" (Cond.propEq \"tribunal\" (Value.str \"córdoba\")) a1)) (PProd (Evidence Grade.Verified (SumWhere \"executions in effigie\" (Cond.propEq \"tribunal\" (Value.str \"córdoba\")) a2)) (PProd (Evidence Grade.Verified (SumWhere \"executions in persona\" (Cond.propEq \"tribunal\" (Value.str \"valencia\")) b1)) (PProd (Evidence Grade.Verified (SumWhere \"executions in effigie\" (Cond.propEq \"tribunal\" (Value.str \"valencia\")) b2)) (PLift (ans.asRat = (a1.asRat + a2.asRat) - (b1.asRat + b2.asRat))))))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "Executions in persona",
+        "condition": {
+          "op": "eq",
+          "property": "Tribunal",
+          "value": "córdoba"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "Executions in effigie",
+        "condition": {
+          "op": "eq",
+          "property": "Tribunal",
+          "value": "córdoba"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "Executions in persona",
+        "condition": {
+          "op": "eq",
+          "property": "Tribunal",
+          "value": "valencia"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "Executions in effigie",
+        "condition": {
+          "op": "eq",
+          "property": "Tribunal",
+          "value": "valencia"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 34 1), obs0_val, obs1_val, obs2_val, obs3_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PProd.mk obs2_l2 (PProd.mk obs3_l2 (PLift.up ?_))))\nnative_decide"
+  },
+  {
+    "table_id": "50e30b3aec81d556db90cb2055da773b",
+    "question": "What is the total number of medals (M36 + M36B1 + M36B2) earned from May 1944 to August 1944?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), Σ (c : Value), PProd (Evidence Grade.Verified (SumWhere \"m36\" (Cond.or (Cond.or (Cond.propEq \"month\" (Value.str \"may 1944\")) (Cond.propEq \"month\" (Value.str \"june 1944\"))) (Cond.or (Cond.propEq \"month\" (Value.str \"july 1944\")) (Cond.propEq \"month\" (Value.str \"august 1944\")))) a)) (PProd (Evidence Grade.Verified (SumWhere \"m36b1\" (Cond.or (Cond.or (Cond.propEq \"month\" (Value.str \"may 1944\")) (Cond.propEq \"month\" (Value.str \"june 1944\"))) (Cond.or (Cond.propEq \"month\" (Value.str \"july 1944\")) (Cond.propEq \"month\" (Value.str \"august 1944\")))) b)) (PProd (Evidence Grade.Verified (SumWhere \"m36b2\" (Cond.or (Cond.or (Cond.propEq \"month\" (Value.str \"may 1944\")) (Cond.propEq \"month\" (Value.str \"june 1944\"))) (Cond.or (Cond.propEq \"month\" (Value.str \"july 1944\")) (Cond.propEq \"month\" (Value.str \"august 1944\")))) c)) (PLift (ans.asRat = a.asRat + b.asRat + c.asRat))))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "M36",
+        "condition": {
+          "op": "or",
+          "left": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "Month",
+              "value": "may 1944"
+            },
+            "right": {
+              "op": "eq",
+              "property": "Month",
+              "value": "june 1944"
+            }
+          },
+          "right": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "Month",
+              "value": "july 1944"
+            },
+            "right": {
+              "op": "eq",
+              "property": "Month",
+              "value": "august 1944"
+            }
+          }
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "M36B1",
+        "condition": {
+          "op": "or",
+          "left": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "Month",
+              "value": "may 1944"
+            },
+            "right": {
+              "op": "eq",
+              "property": "Month",
+              "value": "june 1944"
+            }
+          },
+          "right": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "Month",
+              "value": "july 1944"
+            },
+            "right": {
+              "op": "eq",
+              "property": "Month",
+              "value": "august 1944"
+            }
+          }
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "M36B2",
+        "condition": {
+          "op": "or",
+          "left": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "Month",
+              "value": "may 1944"
+            },
+            "right": {
+              "op": "eq",
+              "property": "Month",
+              "value": "june 1944"
+            }
+          },
+          "right": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "Month",
+              "value": "july 1944"
+            },
+            "right": {
+              "op": "eq",
+              "property": "Month",
+              "value": "august 1944"
+            }
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 475 1), obs0_val, obs1_val, obs2_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PProd.mk obs2_l2 (PLift.up ?_)))\nnative_decide"
+  },
+  {
+    "table_id": "53b60df40c509bb2ad5b686fa130486c",
+    "question": "How many banks have total assets of more than 10,000 million TL?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"total assets (million tl) as of 30 september 2012\" (Cond.propGt \"total assets (million tl) as of 30 september 2012\" (Value.rat (mkRat 10000 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "total assets (million tl) as of 30 september 2012",
+        "condition": {
+          "op": "gt",
+          "property": "total assets (million tl) as of 30 september 2012",
+          "value": 10000
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "540d28c2cbf41498a2124f3d4f025339",
+    "question": "What is the average population density of municipalities with an area greater than 700 km 2 and a human development index above 0.7?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"population density ( / km 2 )\" (Cond.and (Cond.propGt \"area (km 2 )\" (Value.rat (mkRat 700 1))) (Cond.propGt \"human development index (2000)\" (Value.rat (mkRat 7 10)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "population density ( / km 2 )",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gt",
+            "property": "area (km 2 )",
+            "value": 700
+          },
+          "right": {
+            "op": "gt",
+            "property": "human development index (2000)",
+            "value": 0.7
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "566c9200cea18c995a6c5cfb3ef59f71",
+    "question": "What is the total intake of all 'primary' schools that have a 'dcsf number' less than 2200?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"intake\" (Cond.and (Cond.propEq \"type\" (Value.str \"primary\")) (Cond.propLt \"dcsf number\" (Value.rat (mkRat 2200 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "intake",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "eq",
+            "property": "type",
+            "value": "primary"
+          },
+          "right": {
+            "op": "lt",
+            "property": "dcsf number",
+            "value": 2200
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "577472b9c44b101799d923f48cd30454",
+    "question": "How many states have a value greater than 0.3 in the 2001-05 time period?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"2001 - 05\" (Cond.propGt \"2001 - 05\" (Value.rat (mkRat 3 10))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "2001 - 05",
+        "condition": {
+          "op": "gt",
+          "property": "2001 - 05",
+          "value": 0.3
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "5c2f583f71d78d31ef4fca4f4f3e084f",
+    "question": "What is the difference in length (in km) between the longest road and the shortest road in the 'sirmour' district?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (MaxWhere \"length (in km)\" (Cond.propEq \"passes through - district (s\" (Value.str \"sirmour\")) a)) (PProd (Evidence Grade.Verified (MinWhere \"length (in km)\" (Cond.propEq \"passes through - district (s\" (Value.str \"sirmour\")) b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "max",
+        "column": "length (in km)",
+        "condition": {
+          "op": "eq",
+          "property": "passes through - district (s",
+          "value": "sirmour"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "min",
+        "column": "length (in km)",
+        "condition": {
+          "op": "eq",
+          "property": "passes through - district (s",
+          "value": "sirmour"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 114 1), obs0_val, obs1_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up ?_))\nnative_decide"
+  },
+  {
+    "table_id": "5d0f2b303e9271a48109c4d6b80206d8",
+    "question": "Which year had the highest crude birth rate (per 1000) in the given time period?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"crude birth rate (per 1000)\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "Crude birth rate (per 1000)",
+        "identity_column": "Unnamed: 0",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"1980\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "60effd85ac81cca8bbca69134e0b73a5",
+    "question": "What is the average US chart position of all songs in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"us chart position\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "US Chart position",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "629103144efe26a2da56a953c77fa3f8",
+    "question": "How many nations have won at least one gold medal?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"gold\" (Cond.propGte \"gold\" (Value.rat (mkRat 1 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "Gold",
+        "condition": {
+          "op": "gte",
+          "property": "Gold",
+          "value": 1
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "63359e8db2964276d15c92a05ec20ffb",
+    "question": "How many companies in the banking industry are listed in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"industry\" (Cond.propEq \"industry\" (Value.str \"banking\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "industry",
+        "condition": {
+          "op": "eq",
+          "property": "industry",
+          "value": "banking"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "641049a7c6d1991bcab451db8e49ac54",
+    "question": "How much greater is the average relative annual growth rate of Egypt compared to Morocco?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (MeanWhere \"average relative annual growth (%)\" (Cond.propEq \"country (or dependent territory)\" (Value.str \"egypt\")) a)) (PProd (Evidence Grade.Verified (MeanWhere \"average relative annual growth (%)\" (Cond.propEq \"country (or dependent territory)\" (Value.str \"morocco\")) b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "average relative annual growth (%)",
+        "condition": {
+          "op": "eq",
+          "property": "country (or dependent territory)",
+          "value": "egypt"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "average relative annual growth (%)",
+        "condition": {
+          "op": "eq",
+          "property": "country (or dependent territory)",
+          "value": "morocco"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 121 100), obs0_val, obs1_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up ?_))\nnative_decide"
+  },
+  {
+    "table_id": "64b77c1e7f30ca236e405528bdeac502",
+    "question": "What is the average number of floors in buildings constructed from 1895 to 1980?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"floors\" (Cond.and (Cond.propGte \"year\" (Value.rat (mkRat 1895 1))) (Cond.propLte \"year\" (Value.rat (mkRat 1980 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "floors",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gte",
+            "property": "year",
+            "value": 1895
+          },
+          "right": {
+            "op": "lte",
+            "property": "year",
+            "value": 1980
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "65aadc9add4b1a42f5b5071d6a16cfd6",
+    "question": "How many individuals have a 'Number' value greater than 1500?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"number\" (Cond.propGt \"number\" (Value.rat (mkRat 1500 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "Number",
+        "condition": {
+          "op": "gt",
+          "property": "Number",
+          "value": 1500
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "65e3fbcba3509cbc4e19cdf82a8c15da",
+    "question": "What is the average revenue of the top 5 companies in the 'banking' industry?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (TopKMeanWhere \"revenue (millions)\" 4 (Cond.propEq \"industry\" (Value.str \"banking\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "topk_mean",
+        "column": "revenue (millions)",
+        "n": 4,
+        "condition": {
+          "op": "eq",
+          "property": "industry",
+          "value": "banking"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "663af775c49891f680893517237e7158",
+    "question": "How many transcription factors have an occurrence count greater than 1?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"occurrence\" (Cond.propGt \"occurrence\" (Value.rat (mkRat 1 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "occurrence",
+        "condition": {
+          "op": "gt",
+          "property": "occurrence",
+          "value": 1
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "666b1d906e698c14c9fabe3d2d383be9",
+    "question": "Which player has the highest total goals among all players in the table?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"total goals\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "total goals",
+        "identity_column": "name",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"luke beckett\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "66ba5aa71ed35406e5bb3d31a2a25ef1",
+    "question": "How many hurricanes occurred in the month of September?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"month\" (Cond.propContains \"month\" (Value.str \"September\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "Month",
+        "condition": {
+          "op": "contains",
+          "property": "Month",
+          "value": "September"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "66ea61b936831554ebaa4423d2600550",
+    "question": "How many elections did the party win75 or more seats?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"seats\" (Cond.propGte \"seats\" (Value.rat (mkRat 75 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "seats",
+        "condition": {
+          "op": "gte",
+          "property": "seats",
+          "value": 75
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "6b91092d9b595b1b22ac8c1791a0f2b7",
+    "question": "How many parties have more than 10% of the total votes?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"%\" (Cond.and (Cond.propGt \"%\" (Value.rat (mkRat 10 1))) (Cond.not (Cond.propEq \"party\" (Value.str \"Total\")))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "%",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gt",
+            "property": "%",
+            "value": 10
+          },
+          "right": {
+            "op": "not",
+            "inner": {
+              "op": "eq",
+              "property": "Party",
+              "value": "Total"
+            }
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "6c43b934f20ce71710bfb837d0fbc556",
+    "question": "Which year had the highest number of injuries (in thousands of US dollars) according to the provided data?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"injuries (us $000)\" (Cond.not (Cond.propEq \"injuries (us $000)\" (Value.str \"no data\"))) e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "Injuries (US $000)",
+        "identity_column": "Year",
+        "condition": {
+          "op": "not",
+          "inner": {
+            "op": "eq",
+            "property": "Injuries (US $000)",
+            "value": "no data"
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"2001\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "6e909081b29bd08e4a7c528b6b5e1d84",
+    "question": "What is the total population of all places where Afrikaans is the most spoken language?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"population\" (Cond.propEq \"most spoken language\" (Value.str \"afrikaans\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "population",
+        "condition": {
+          "op": "eq",
+          "property": "most spoken language",
+          "value": "afrikaans"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "6f416284e0b161716e479a0f4b3e6772",
+    "question": "How many coins were issued between 2000 and 2005?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"year\" (Cond.and (Cond.propGte \"year\" (Value.rat (mkRat 2000 1))) (Cond.propLte \"year\" (Value.rat (mkRat 2005 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "year",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gte",
+            "property": "year",
+            "value": 2000
+          },
+          "right": {
+            "op": "lte",
+            "property": "year",
+            "value": 2005
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "72b56e932806834c1fa4b6e1287b7997",
+    "question": "What is the difference in boiling points (in ˚C) between the component with the highest 'bp comp 1 (˚c)' value and the component with the lowest 'bp comp 1 (˚c)' value?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (MaxWhere \"bp comp 1 (˚c)\" Cond.all a)) (PProd (Evidence Grade.Verified (MinWhere \"bp comp 1 (˚c)\" Cond.all b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "max",
+        "column": "bp comp 1 (˚c)",
+        "condition": {
+          "op": "all"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "min",
+        "column": "bp comp 1 (˚c)",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 3086 10), obs0_val, obs1_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up ?_))\nnative_decide"
+  },
+  {
+    "table_id": "73195d923251e56c5bfb25f8d9f98cfd",
+    "question": "Which mountain has the highest elevation (m) among those in greece?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"elevation (m)\" (Cond.not (Cond.propEq \"country\" (Value.str \"cyprus\"))) e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "elevation (m)",
+        "identity_column": "peak",
+        "condition": {
+          "op": "not",
+          "inner": {
+            "op": "eq",
+            "property": "country",
+            "value": "cyprus"
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"mount ida\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "75ce633da5e63347890c7d60258d77f9",
+    "question": "How many countries have a population of more than 40 million?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"population\" (Cond.propGt \"population\" (Value.rat (mkRat 40000000 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "population",
+        "condition": {
+          "op": "gt",
+          "property": "population",
+          "value": 40000000
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "7648f00905c0673b773a2bf6ad1d8223",
+    "question": "Which episode has the highest number of viewers?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"viewers\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "viewers",
+        "identity_column": "title",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"live and let doyle\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "767d183aa02457793092c2e983eeb612",
+    "question": "What is the average population density of all municipalities in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"population density ( / km 2 )\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "population density ( / km 2 )",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "78f78dcbbb7c5ac9b2b220adaa1060d7",
+    "question": "What is the average market value of the top 5 companies in the oil and gas industry?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (TopKMeanWhere \"market value (billion )\" 5 (Cond.propEq \"industry\" (Value.str \"oil and gas\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "topk_mean",
+        "column": "market value (billion )",
+        "n": 5,
+        "condition": {
+          "op": "eq",
+          "property": "industry",
+          "value": "oil and gas"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "7921fdcc5a90b76659f95d2166580fcf",
+    "question": "What is the difference in elevation (in meters) between the mountain with the highest elevation and the mountain with the lowest elevation?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (MaxWhere \"elevation (m)\" Cond.all a)) (PProd (Evidence Grade.Verified (MinWhere \"elevation (m)\" Cond.all b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "max",
+        "column": "elevation (m)",
+        "condition": {
+          "op": "all"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "min",
+        "column": "elevation (m)",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 2728 1), obs0_val, obs1_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up ?_))\nnative_decide"
+  },
+  {
+    "table_id": "79c7100e623e490d4aabd5361cd50c5b",
+    "question": "How many squadrons were built by 'brighton' in 1948?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"builder\" (Cond.and (Cond.propEq \"builder\" (Value.str \"brighton\")) (Cond.propEq \"whenbuilt\" (Value.rat (mkRat 1948 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "builder",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "eq",
+            "property": "builder",
+            "value": "brighton"
+          },
+          "right": {
+            "op": "eq",
+            "property": "whenbuilt",
+            "value": 1948
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "839734f9a3d8150f3099c50c3280af75",
+    "question": "What is the average profit (in US billion) of the top 5 companies in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"profit (us billion)\" (Cond.propLte \"rank\" (Value.rat (mkRat 5 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "profit (us billion)",
+        "condition": {
+          "op": "lte",
+          "property": "rank",
+          "value": 5
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "85e54c4224379fa75e8bb916f8014b3c",
+    "question": "What is the average prominence of mountain peaks in Morocco that have an elevation of at least 3000 meters and a col elevation of more than 1500 meters?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"prominence (m)\" (Cond.and (Cond.propEq \"country\" (Value.str \"morocco\")) (Cond.and (Cond.propGte \"elevation (m)\" (Value.rat (mkRat 3000 1))) (Cond.propGt \"col (m)\" (Value.rat (mkRat 1500 1))))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "prominence (m)",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "eq",
+            "property": "country",
+            "value": "morocco"
+          },
+          "right": {
+            "op": "and",
+            "left": {
+              "op": "gte",
+              "property": "elevation (m)",
+              "value": 3000
+            },
+            "right": {
+              "op": "gt",
+              "property": "col (m)",
+              "value": 1500
+            }
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "86e19cb374ce7c6940e9a9d467303067",
+    "question": "Which episode had the lowest rating?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgminWhere \"rating\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmin",
+        "column": "rating",
+        "identity_column": "episode",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"the reunion\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "8bbcb834cd1f78b5fdea62a28c9746d5",
+    "question": "What is the difference in total goals scored by the top-scoring forward (fw) and the top-scoring midfielder (mf) in the league?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (MaxWhere \"total goals\" (Cond.propEq \"position\" (Value.str \"fw\")) a)) (PProd (Evidence Grade.Verified (MaxWhere \"total goals\" (Cond.propEq \"position\" (Value.str \"mf\")) b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "max",
+        "column": "total goals",
+        "condition": {
+          "op": "eq",
+          "property": "position",
+          "value": "fw"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "max",
+        "column": "total goals",
+        "condition": {
+          "op": "eq",
+          "property": "position",
+          "value": "mf"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 7 1), obs0_val, obs1_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up ?_))\nnative_decide"
+  },
+  {
+    "table_id": "8d2c0f071a634bd6233252d4a2f97d91",
+    "question": "Which chambering has the highest maximum pressure (p max) in bars?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"p max ( bar )\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "p max ( bar )",
+        "identity_column": "chambering",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\".454 casull\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "8e90a54d425a61c7bb3cc66e5698edbf",
+    "question": "In which series did the show achieve the highest average viewership (in millions)?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"average viewers (millions)\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "average viewers (millions)",
+        "identity_column": "series",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"three\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "977fbcfd2756614b2cdb69c9f742d8bb",
+    "question": "How much greater is the population density in 2012 of the sector with the highest population density compared to the sector with the lowest population density?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (MaxWhere \"population density 2012 (km 2 )\" Cond.all a)) (PProd (Evidence Grade.Verified (MinWhere \"population density 2012 (km 2 )\" Cond.all b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "max",
+        "column": "population density 2012 (km 2 )",
+        "condition": {
+          "op": "all"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "min",
+        "column": "population density 2012 (km 2 )",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 487 1), obs0_val, obs1_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up ?_))\nnative_decide"
+  },
+  {
+    "table_id": "9a6f45b58f3230e8a11f4f7cd5afa465",
+    "question": "What is the total length of all rivers that flow into the left side of the main river, in kilometers?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"length [km]\" (Cond.propEq \"position\" (Value.str \"left\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "length [km]",
+        "condition": {
+          "op": "eq",
+          "property": "Position",
+          "value": "left"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "9bd2405b2c4d9af26013351147098518",
+    "question": "Which city has the lowest GDP per capita in thousands of ID?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgminWhere \"gdp per capita id k\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmin",
+        "column": "gdp per capita id k",
+        "identity_column": "city",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"istanbul\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "9eb17e466a9ae8c241c276e69e368046",
+    "question": "What is the average number of performances per year between 2004 and 2013?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"no. of performances\" (Cond.and (Cond.propGte \"year\" (Value.rat (mkRat 2004 1))) (Cond.propLte \"year\" (Value.rat (mkRat 2013 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "No. of performances",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gte",
+            "property": "Year",
+            "value": 2004
+          },
+          "right": {
+            "op": "lte",
+            "property": "Year",
+            "value": 2013
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "9ed3912eda93df5274890d914b69329e",
+    "question": "What is the average number of Indians admitted per year from 2000 to 2010?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"indians admitted\" (Cond.and (Cond.propGte \"year\" (Value.rat (mkRat 2000 1))) (Cond.propLte \"year\" (Value.rat (mkRat 2010 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "indians admitted",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gte",
+            "property": "year",
+            "value": 2000
+          },
+          "right": {
+            "op": "lte",
+            "property": "year",
+            "value": 2010
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "9f6acb3e258123c6d0841b052d95505f",
+    "question": "What is the average rank of the indices published by Transparency International?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"rank\" (Cond.propEq \"organization\" (Value.str \"transparency international\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "rank",
+        "condition": {
+          "op": "eq",
+          "property": "organization",
+          "value": "transparency international"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "9fd3d8839e4a861d3caeef557dc78e70",
+    "question": "How many districts have a 2008 GDP per capita (USD) above 6700?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"2008 gdp per capita (usd) a\" (Cond.propGt \"2008 gdp per capita (usd) a\" (Value.rat (mkRat 6700 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "2008 gdp per capita (usd) a",
+        "condition": {
+          "op": "gt",
+          "property": "2008 gdp per capita (usd) a",
+          "value": 6700
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "a4f6d7cb86e12d536c41b2a9a6bab3d2",
+    "question": "What is the average number of US viewers (in millions) for the episodes in Season 1?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"us viewers (million)\" (Cond.propEq \"season\" (Value.rat (mkRat 1 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "us viewers (million)",
+        "condition": {
+          "op": "eq",
+          "property": "season",
+          "value": 1
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "a5de47ae8731889ae862729fb82127b2",
+    "question": "How many cost categories have a percentage increase greater than 5% from 2017 to 2018?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"percent increase (decrease) (in cents, except percentage changes)\" (Cond.propGt \"percent increase (decrease) (in cents, except percentage changes)\" (Value.rat (mkRat 5 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "Percent Increase (Decrease) (In cents, except percentage changes)",
+        "condition": {
+          "op": "gt",
+          "property": "Percent Increase (Decrease) (In cents, except percentage changes)",
+          "value": 5
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "a6bf1a5c7ab44c8674bb88b508865392",
+    "question": "How many cities have a residential monthly usage of 1000 kwh above 12?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"residential monthly usage : 1000 kwh\" (Cond.propGt \"residential monthly usage : 1000 kwh\" (Value.rat (mkRat 12 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "residential monthly usage : 1000 kwh",
+        "condition": {
+          "op": "gt",
+          "property": "residential monthly usage : 1000 kwh",
+          "value": 12
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "ac4ea376af826244678bb8ef6a0e024b",
+    "question": "What is the total commissioned capacity (in MW) of all power plants in Himachal Pradesh?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"commissioned capacity (mw)\" (Cond.propEq \"state\" (Value.str \"himachal pradesh\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "commissioned capacity (mw)",
+        "condition": {
+          "op": "eq",
+          "property": "state",
+          "value": "himachal pradesh"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "b60f42005fcd5f0e80b5e791178df802",
+    "question": "How many engines have a specific impulse greater than 1000 seconds?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"specific impulse (s)\" (Cond.propGt \"specific impulse (s)\" (Value.rat (mkRat 1000 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "specific impulse (s)",
+        "condition": {
+          "op": "gt",
+          "property": "specific impulse (s)",
+          "value": 1000
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "b6219d257925aa2abc3e4511e5a2ac16",
+    "question": "What is the average percentage of males across all states in India?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"males (%)\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "males (%)",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "b6ce5ae3244350599a7403a76a1f1c69",
+    "question": "What is the average height (in meters) of the top 5 tallest buildings in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (TopKMeanWhere \"height (m)\" 5 Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "topk_mean",
+        "column": "height (m)",
+        "n": 5,
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "b878f1ad3f7646fcd7ede1bc02533f33",
+    "question": "Which election year had the highest percentage of party list votes?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"% of party list votes\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "% of party list votes",
+        "identity_column": "election year",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"1969\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "ba50a0e8eb4cb8d333a99027ae817059",
+    "question": "What is the difference between the highest and lowest metabolic rates among the female animals?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (MaxWhere \"metabolic rate\" (Cond.propEq \"sex\" (Value.str \"Female\")) a)) (PProd (Evidence Grade.Verified (MinWhere \"metabolic rate\" (Cond.propEq \"sex\" (Value.str \"Female\")) b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "max",
+        "column": "metabolic rate",
+        "condition": {
+          "op": "eq",
+          "property": "sex",
+          "value": "Female"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "min",
+        "column": "metabolic rate",
+        "condition": {
+          "op": "eq",
+          "property": "sex",
+          "value": "Female"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 12284 10), obs0_val, obs1_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up ?_))\nnative_decide"
+  },
+  {
+    "table_id": "bdfc75083d56bd5610e9b315a8439e1b",
+    "question": "What is the total number of races won by Daniël Willemsen?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"wins\" (Cond.and (Cond.propEq \"driver\" (Value.str \"daniël willemsen\")) (Cond.not (Cond.propEq \"wins\" (Value.str \"-\")))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "wins",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "eq",
+            "property": "driver",
+            "value": "daniël willemsen"
+          },
+          "right": {
+            "op": "not",
+            "inner": {
+              "op": "eq",
+              "property": "wins",
+              "value": "-"
+            }
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "bdfcc7e1bb6dc5eef09456c8ba56f46d",
+    "question": "How many cantons have 'yes' in the 'separate secondary schools' column?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"separate secondary schools\" (Cond.propEq \"separate secondary schools\" (Value.str \"yes\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "separate secondary schools",
+        "condition": {
+          "op": "eq",
+          "property": "separate secondary schools",
+          "value": "yes"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "be0223bd4b1d4dcfcb9bf7d3351329b3",
+    "question": "What is the total population of all districts in the city?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"population (2010 census)\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "population (2010 census)",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "c053c02d128201b79cbbd11c395f542a",
+    "question": "How many universities are located in London?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"location\" (Cond.propEq \"location\" (Value.str \"london\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "location",
+        "condition": {
+          "op": "eq",
+          "property": "location",
+          "value": "london"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "c1657743b6eeb5b20e41af290a3dad55",
+    "question": "How many more total medals did the school with the highest total medals win than the school with the lowest total medals?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (MaxWhere \"total medals\" Cond.all a)) (PProd (Evidence Grade.Verified (MinWhere \"total medals\" Cond.all b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "max",
+        "column": "total medals",
+        "condition": {
+          "op": "all"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "min",
+        "column": "total medals",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 6 1), obs0_val, obs1_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up ?_))\nnative_decide"
+  },
+  {
+    "table_id": "c195eb7689321829b33cdc40c5931ad3",
+    "question": "What is the average time of all athletes in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"time\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "time",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "c2d0e0b5e2f5835d65687912d1ad3d7c",
+    "question": "What is the total number of seats won by the party across all elections listed in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"of seats won\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "of seats won",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "c5e88a53c5cf14366e0d42de7eb6ab13",
+    "question": "What is the average number of days served by the top 5 ranked governors?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (TopKMeanWhere \"days\" 5 Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "topk_mean",
+        "column": "days",
+        "n": 5,
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "c8a0829ce6f11dd2af255ba6d1e54552",
+    "question": "What is the average prominence of mountain peaks in the Democratic Republic of the Congo that have an elevation of at least 3000 meters?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"prominence (m)\" (Cond.and (Cond.propContains \"country\" (Value.str \"democratic republic of the congo\")) (Cond.propGte \"elevation (m)\" (Value.rat (mkRat 3000 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "prominence (m)",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "contains",
+            "property": "country",
+            "value": "democratic republic of the congo"
+          },
+          "right": {
+            "op": "gte",
+            "property": "elevation (m)",
+            "value": 3000
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "cb0e9191e00b1c14c4245fa8c0a04efd",
+    "question": "Which party has the highest total number of seats across all panels?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"total\" (Cond.not (Cond.propEq \"party\" (Value.str \"total\"))) e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "total",
+        "identity_column": "party",
+        "condition": {
+          "op": "not",
+          "inner": {
+            "op": "eq",
+            "property": "party",
+            "value": "total"
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"independent\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "cb663d0399df511cd8a624ea0c85c8f0",
+    "question": "How many mountains are located in Austria?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"location\" (Cond.propEq \"location\" (Value.str \"austria\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "location",
+        "condition": {
+          "op": "eq",
+          "property": "location",
+          "value": "austria"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "cbcc7b1e8b1ce02508f3c40557e13e0c",
+    "question": "How many regions in Italy have a population of more than 4 million?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"population\" (Cond.propGt \"population\" (Value.rat (mkRat 4000000 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "population",
+        "condition": {
+          "op": "gt",
+          "property": "population",
+          "value": 4000000
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "cf9dd52a762be9733bb8d507360547ed",
+    "question": "How many parties have won 10 or fewer seats in the election?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"seats won\" (Cond.propLte \"seats won\" (Value.rat (mkRat 10 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "seats won",
+        "condition": {
+          "op": "lte",
+          "property": "seats won",
+          "value": 10
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "d0a1f61b05fa1d4c1cada744578f10e0",
+    "question": "What is the average market value of companies in the oil and gas industry that have sales of at least 300 billion?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"market value (billion )\" (Cond.and (Cond.propEq \"industry\" (Value.str \"oil and gas\")) (Cond.propGte \"sales (billion )\" (Value.rat (mkRat 300 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "market value (billion )",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "eq",
+            "property": "industry",
+            "value": "oil and gas"
+          },
+          "right": {
+            "op": "gte",
+            "property": "sales (billion )",
+            "value": 300
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "d0a81a29b19bb9b01e0e01329ad80112",
+    "question": "How many jurisdictions had more than 70% of votes in favor of prohibition?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"percent for\" (Cond.propGt \"percent for\" (Value.rat (mkRat 70 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "percent for",
+        "condition": {
+          "op": "gt",
+          "property": "percent for",
+          "value": 70
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "d277ebc4a7a4c1aec7fd73a98ae56d13",
+    "question": "In the context of TV ratings, the \"audience share\" is defined as the percentage of viewers watching a particular channel out of the total number of viewers watching TV at a given time. Based on this definition, which episode of the show had the highest audience share?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"share (%)\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "share (%)",
+        "identity_column": "episode",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"live final\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "d36f751dac69318f27f101ed13b4710a",
+    "question": "What is the total number of medals won by all nations listed in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"total\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "total",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "d4089b01cb0b1550e4df597512eb8eea",
+    "question": "What is the total number of students who took SAT subject tests in mathematics (both Level 1 and Level 2)?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"number of students\" (Cond.propEq \"subject\" (Value.str \"mathematics\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "number of students",
+        "condition": {
+          "op": "eq",
+          "property": "subject",
+          "value": "mathematics"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "da3b06794c40fc042b0b94985865f012",
+    "question": "Which state has the highest HIV awareness percentage among females?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"females (%)\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "females (%)",
+        "identity_column": "state",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"manipur\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "dd778956ba0b5266e7a32a45bf8ab123",
+    "question": "What is the average magnitude of earthquakes that have resulted in a death toll of at least 1,000 and have a depth of less than 30 km?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"magnitude\" (Cond.and (Cond.propGte \"death toll\" (Value.rat (mkRat 1000 1))) (Cond.propLt \"depth (km)\" (Value.rat (mkRat 30 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "Magnitude",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gte",
+            "property": "Death toll",
+            "value": 1000
+          },
+          "right": {
+            "op": "lt",
+            "property": "Depth (km)",
+            "value": 30
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "e22a374e087942766de36d3bd733f72a",
+    "question": "What is the total quantity of orders placed in the earliest two years represented in the table?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"quantity\" (Cond.propLte \"year\" (Value.rat (mkRat 1894 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "Quantity",
+        "condition": {
+          "op": "lte",
+          "property": "Year",
+          "value": 1894
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "e3569f6407cc27dec6d090871fb8eba9",
+    "question": "How many episodes had a rating of 5.3 or higher?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"rating\" (Cond.propGte \"rating\" (Value.rat (mkRat 53 10))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "rating",
+        "condition": {
+          "op": "gte",
+          "property": "rating",
+          "value": 5.3
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "e3cdc02ff933ead57a5ddd0f4dc189c2",
+    "question": "What is the total GDP of all South American countries listed in the table according to the 2011 IMF estimates?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"2011 (imf)\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "2011 (imf)",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "e7b71d1c7427df2a8dd74f7b599ff66e",
+    "question": "What is the total number of PR seats won by all parties combined?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"pr seats\" (Cond.not (Cond.propEq \"party\" (Value.str \"total\"))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "pr seats",
+        "condition": {
+          "op": "not",
+          "inner": {
+            "op": "eq",
+            "property": "party",
+            "value": "total"
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "e8e5c45d05e0e2447b058f67b3f038b5",
+    "question": "Which season did the driver achieve the highest number of wins?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"wins\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "wins",
+        "identity_column": "season",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"2004\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "e98478f17f738dd3bdd2ff3352d71381",
+    "question": "How many cities/municipalities have a population density of over 3000 per km square?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"pop density (per km square)\" (Cond.propGt \"pop density (per km square)\" (Value.rat (mkRat 3000 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "pop density (per km square)",
+        "condition": {
+          "op": "gt",
+          "property": "pop density (per km square)",
+          "value": 3000
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "ea29c3703787096422647ea08ceb19f9",
+    "question": "What is the average elevation of districts in the Cusco region that have an elevation above 4700 meters?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"elevation (m)\" (Cond.and (Cond.propEq \"region\" (Value.str \"cusco\")) (Cond.propGt \"elevation (m)\" (Value.rat (mkRat 4700 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "elevation (m)",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "eq",
+            "property": "region",
+            "value": "cusco"
+          },
+          "right": {
+            "op": "gt",
+            "property": "elevation (m)",
+            "value": 4700
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "ebcf933b385594298b3d52a00d7d9682",
+    "question": "How many countries have at least one semifinalist?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (CountWhere \"semifinalists\" (Cond.propGte \"semifinalists\" (Value.rat (mkRat 1 1))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "count_where",
+        "column": "semifinalists",
+        "condition": {
+          "op": "gte",
+          "property": "semifinalists",
+          "value": 1
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "f05eecdcb6b316d67cfcdee33a48b838",
+    "question": "What is the total mintage of all coins from 2002 to 2012?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"mintage\" Cond.all ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "mintage",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "f54fdc8f3471782a34be35f0f3e38535",
+    "question": "How much higher is the elevation of the mountain with the highest elevation than the mountain with the lowest elevation?",
+    "lean_goal_type": "Σ (ans : Value), Σ (a : Value), Σ (b : Value), PProd (Evidence Grade.Verified (MaxWhere \"elevation (m)\" Cond.all a)) (PProd (Evidence Grade.Verified (MinWhere \"elevation (m)\" Cond.all b)) (PLift (ans.asRat = a.asRat - b.asRat)))",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "max",
+        "column": "elevation (m)",
+        "condition": {
+          "op": "all"
+        }
+      },
+      {
+        "action": "stats",
+        "operation": "min",
+        "column": "elevation (m)",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨Value.rat (mkRat 1207 1), obs0_val, obs1_val, ?_⟩\nrefine PProd.mk obs0_l2 (PProd.mk obs1_l2 (PLift.up ?_))\nnative_decide"
+  },
+  {
+    "table_id": "f99e2389f5d1f9e1ea48c27d37ec0ec2",
+    "question": "In which election year did the party achieve the highest percentage of popular vote?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"% of popular vote\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "% of popular vote",
+        "identity_column": "election",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"1958\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "fa409ae64ba45abe8542615ebf93a304",
+    "question": "Which economy had the highest GDP per capita as of 2012 (PPP)?",
+    "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gdp per capita as of 2012 (ppp)\" Cond.all e v)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "argmax",
+        "column": "gdp per capita as of 2012 (ppp)",
+        "identity_column": "economy",
+        "condition": {
+          "op": "all"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨\"singapore\", obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "fbd83f8dbf53095ebbddef8abd5e4497",
+    "question": "What is the average issue price of coins released between 2002 and 2005?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (MeanWhere \"issue price\" (Cond.and (Cond.propGte \"year\" (Value.rat (mkRat 2002 1))) (Cond.propLte \"year\" (Value.rat (mkRat 2005 1)))) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "mean",
+        "column": "issue price",
+        "condition": {
+          "op": "and",
+          "left": {
+            "op": "gte",
+            "property": "year",
+            "value": 2002
+          },
+          "right": {
+            "op": "lte",
+            "property": "year",
+            "value": 2005
+          }
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  },
+  {
+    "table_id": "ffe5d38c4973ddc4bd3ca6d9c2d34406",
+    "question": "What is the total number of Outright Titles won by all schools in Belfast?",
+    "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"outright titles\" (Cond.propEq \"location\" (Value.str \"Belfast\")) ans)",
+    "gold_tool_call": [
+      {
+        "action": "stats",
+        "operation": "sum",
+        "column": "Outright Titles",
+        "condition": {
+          "op": "eq",
+          "property": "Location",
+          "value": "Belfast"
+        }
+      }
+    ],
+    "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+  }
+]

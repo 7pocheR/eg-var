@@ -1,0 +1,820 @@
+{
+  "_meta": {
+    "version": "v4 D.G fixtures (shapes B + C + D, D via Option-Z + post-processor)",
+    "purpose": "Lean artifacts for v4 binary compare (B) and control (C) claims. Shape D (implicit direction) requires Option W sigma-Bool kernel pattern — pipeline.py extension TBD; once landed, add D-shape fixtures.",
+    "shape_coverage": {
+      "B-binary": 10,
+      "C-control": 10,
+      "D-direction": 10
+    },
+    "options_used": "Z fallback for now: ArgmaxWhere with Cond.or disjunction for B; HasProperty for C-lookup; SumWhere with Cond.or for C-sum. Option W replaces D-shape ArgminWhere/HasProperty pattern with a kernel-checked sigma-Bool.",
+    "d_shape_note": "Shape-D entries reuse the shape-B Option-Z ArgmaxWhere formalization (same table, same entity pair, same measure column) and add fields subject_entity / direction_if_subject_{wins,loses}. At evaluation time the post-processor maps the kernel-verified winning entity to the direction word: if witness matches subject_entity, answer = direction_if_subject_wins; else direction_if_subject_loses."
+  },
+  "fixtures": [
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "Which country has a larger population (in the 'july 1, 2013 projection' column): Egypt or Yemen?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"july 1 , 2013 projection\" (Cond.or (Cond.propEq \"country (or dependent territory)\" (Value.str \"egypt\")) (Cond.propEq \"country (or dependent territory)\" (Value.str \"yemen\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "july 1 , 2013 projection",
+          "identity_column": "country (or dependent territory)",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "egypt"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "yemen"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"yemen\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "What is the population of Egypt (in the 'july 1, 2013 projection' column)?",
+      "lean_goal_type": "Σ (v : Value), Evidence Grade.Verified (HasProperty \"egypt\" \"july 1 , 2013 projection\" v)",
+      "gold_tool_call": [
+        {
+          "action": "lookup",
+          "entity": "egypt",
+          "property": "july 1 , 2013 projection"
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "Which country has a larger population (in the 'july 1, 2013 projection' column): Algeria or Saudi Arabia?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"july 1 , 2013 projection\" (Cond.or (Cond.propEq \"country (or dependent territory)\" (Value.str \"algeria\")) (Cond.propEq \"country (or dependent territory)\" (Value.str \"saudi arabia\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "july 1 , 2013 projection",
+          "identity_column": "country (or dependent territory)",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "algeria"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "saudi arabia"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"saudi arabia\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "What is the sum of the populations of Algeria and Saudi Arabia (in the 'july 1, 2013 projection' column)?",
+      "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"july 1 , 2013 projection\" (Cond.or (Cond.propEq \"country (or dependent territory)\" (Value.str \"algeria\")) (Cond.propEq \"country (or dependent territory)\" (Value.str \"saudi arabia\"))) ans)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "sum_where",
+          "column": "july 1 , 2013 projection",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "algeria"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "saudi arabia"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "39c3b24be6bcb3e279ecccea6b641efc",
+      "question": "Which country has a larger gdp (nominal) (millions of usd) 2011: Italy or San Marino?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gdp (nominal) (millions of usd) 2011\" (Cond.or (Cond.propEq \"country\" (Value.str \"italy\")) (Cond.propEq \"country\" (Value.str \"san marino\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gdp (nominal) (millions of usd) 2011",
+          "identity_column": "country",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country",
+              "value": "italy"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country",
+              "value": "san marino"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"san marino\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "39c3b24be6bcb3e279ecccea6b641efc",
+      "question": "What is the gdp (nominal) (millions of usd) 2011 of Italy?",
+      "lean_goal_type": "Σ (v : Value), Evidence Grade.Verified (HasProperty \"italy\" \"gdp (nominal) (millions of usd) 2011\" v)",
+      "gold_tool_call": [
+        {
+          "action": "lookup",
+          "entity": "italy",
+          "property": "gdp (nominal) (millions of usd) 2011"
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "39c3b24be6bcb3e279ecccea6b641efc",
+      "question": "Which country has a larger gdp (nominal) (millions of usd) 2011: Canada or Malta?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gdp (nominal) (millions of usd) 2011\" (Cond.or (Cond.propEq \"country\" (Value.str \"canada\")) (Cond.propEq \"country\" (Value.str \"malta\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gdp (nominal) (millions of usd) 2011",
+          "identity_column": "country",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country",
+              "value": "canada"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country",
+              "value": "malta"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"malta\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "39c3b24be6bcb3e279ecccea6b641efc",
+      "question": "What is the sum of gdp (nominal) (millions of usd) 2011 of Canada and Malta?",
+      "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"gdp (nominal) (millions of usd) 2011\" (Cond.or (Cond.propEq \"country\" (Value.str \"canada\")) (Cond.propEq \"country\" (Value.str \"malta\"))) ans)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "sum_where",
+          "column": "gdp (nominal) (millions of usd) 2011",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country",
+              "value": "canada"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country",
+              "value": "malta"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "03ef349b3920a798e7c9e3b44589d702",
+      "question": "Which team had more wins: New England Patriots or Cleveland Browns?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"wins\" (Cond.or (Cond.propEq \"team\" (Value.str \"new england patriots\")) (Cond.propEq \"team\" (Value.str \"cleveland browns\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "wins",
+          "identity_column": "team",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "team",
+              "value": "new england patriots"
+            },
+            "right": {
+              "op": "eq",
+              "property": "team",
+              "value": "cleveland browns"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"cleveland browns\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "03ef349b3920a798e7c9e3b44589d702",
+      "question": "How many wins did the New England Patriots have?",
+      "lean_goal_type": "Σ (v : Value), Evidence Grade.Verified (HasProperty \"new england patriots\" \"wins\" v)",
+      "gold_tool_call": [
+        {
+          "action": "lookup",
+          "entity": "new england patriots",
+          "property": "wins"
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "03ef349b3920a798e7c9e3b44589d702",
+      "question": "Which team had more wins: Dallas Cowboys or Detroit Lions?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"wins\" (Cond.or (Cond.propEq \"team\" (Value.str \"dallas cowboys\")) (Cond.propEq \"team\" (Value.str \"detroit lions\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "wins",
+          "identity_column": "team",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "team",
+              "value": "dallas cowboys"
+            },
+            "right": {
+              "op": "eq",
+              "property": "team",
+              "value": "detroit lions"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"detroit lions\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "03ef349b3920a798e7c9e3b44589d702",
+      "question": "What is the sum of wins of the Dallas Cowboys and Detroit Lions?",
+      "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"wins\" (Cond.or (Cond.propEq \"team\" (Value.str \"dallas cowboys\")) (Cond.propEq \"team\" (Value.str \"detroit lions\"))) ans)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "sum_where",
+          "column": "wins",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "team",
+              "value": "dallas cowboys"
+            },
+            "right": {
+              "op": "eq",
+              "property": "team",
+              "value": "detroit lions"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "d36f751dac69318f27f101ed13b4710a",
+      "question": "Which nation won more gold medals: United States or Belgium?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gold\" (Cond.or (Cond.propEq \"nation\" (Value.str \"united states\")) (Cond.propEq \"nation\" (Value.str \"belgium\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gold",
+          "identity_column": "nation",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "nation",
+              "value": "united states"
+            },
+            "right": {
+              "op": "eq",
+              "property": "nation",
+              "value": "belgium"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"belgium\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "d36f751dac69318f27f101ed13b4710a",
+      "question": "How many gold medals did the United States win?",
+      "lean_goal_type": "Σ (v : Value), Evidence Grade.Verified (HasProperty \"united states\" \"gold\" v)",
+      "gold_tool_call": [
+        {
+          "action": "lookup",
+          "entity": "united states",
+          "property": "gold"
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "d36f751dac69318f27f101ed13b4710a",
+      "question": "Which nation won more gold medals: Germany or Sweden?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gold\" (Cond.or (Cond.propEq \"nation\" (Value.str \"germany\")) (Cond.propEq \"nation\" (Value.str \"sweden\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gold",
+          "identity_column": "nation",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "nation",
+              "value": "germany"
+            },
+            "right": {
+              "op": "eq",
+              "property": "nation",
+              "value": "sweden"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"sweden\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "d36f751dac69318f27f101ed13b4710a",
+      "question": "What is the sum of gold medals won by Germany and Sweden?",
+      "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"gold\" (Cond.or (Cond.propEq \"nation\" (Value.str \"germany\")) (Cond.propEq \"nation\" (Value.str \"sweden\"))) ans)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "sum_where",
+          "column": "gold",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "nation",
+              "value": "germany"
+            },
+            "right": {
+              "op": "eq",
+              "property": "nation",
+              "value": "sweden"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "65e3fbcba3509cbc4e19cdf82a8c15da",
+      "question": "Which company had a larger revenue (millions): Sinopec or China Ocean Shipping?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"revenue (millions)\" (Cond.or (Cond.propEq \"name\" (Value.str \"sinopec\")) (Cond.propEq \"name\" (Value.str \"china ocean shipping\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "revenue (millions)",
+          "identity_column": "name",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "name",
+              "value": "sinopec"
+            },
+            "right": {
+              "op": "eq",
+              "property": "name",
+              "value": "china ocean shipping"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"china ocean shipping\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "65e3fbcba3509cbc4e19cdf82a8c15da",
+      "question": "What is the revenue (millions) of Sinopec?",
+      "lean_goal_type": "Σ (v : Value), Evidence Grade.Verified (HasProperty \"sinopec\" \"revenue (millions)\" v)",
+      "gold_tool_call": [
+        {
+          "action": "lookup",
+          "entity": "sinopec",
+          "property": "revenue (millions)"
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "65e3fbcba3509cbc4e19cdf82a8c15da",
+      "question": "Which company had a larger revenue (millions): Industrial and Commercial Bank of China or Sinochem Corporation?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"revenue (millions)\" (Cond.or (Cond.propEq \"name\" (Value.str \"industrial and commercial bank of china\")) (Cond.propEq \"name\" (Value.str \"sinochem corporation\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "revenue (millions)",
+          "identity_column": "name",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "name",
+              "value": "industrial and commercial bank of china"
+            },
+            "right": {
+              "op": "eq",
+              "property": "name",
+              "value": "sinochem corporation"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"sinochem corporation\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "65e3fbcba3509cbc4e19cdf82a8c15da",
+      "question": "What is the sum of revenue (millions) of Industrial and Commercial Bank of China and Sinochem Corporation?",
+      "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"revenue (millions)\" (Cond.or (Cond.propEq \"name\" (Value.str \"industrial and commercial bank of china\")) (Cond.propEq \"name\" (Value.str \"sinochem corporation\"))) ans)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "sum_where",
+          "column": "revenue (millions)",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "name",
+              "value": "industrial and commercial bank of china"
+            },
+            "right": {
+              "op": "eq",
+              "property": "name",
+              "value": "sinochem corporation"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "Does Egypt have a larger or smaller population (in the 'july 1, 2013 projection' column) than Yemen?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"july 1 , 2013 projection\" (Cond.or (Cond.propEq \"country (or dependent territory)\" (Value.str \"egypt\")) (Cond.propEq \"country (or dependent territory)\" (Value.str \"yemen\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "july 1 , 2013 projection",
+          "identity_column": "country (or dependent territory)",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "egypt"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "yemen"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"yemen\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V4_D1A_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V4_D1A_B",
+      "subject_entity": "egypt",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "Does Algeria have a larger or smaller population (in the 'july 1, 2013 projection' column) than Saudi Arabia?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"july 1 , 2013 projection\" (Cond.or (Cond.propEq \"country (or dependent territory)\" (Value.str \"algeria\")) (Cond.propEq \"country (or dependent territory)\" (Value.str \"saudi arabia\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "july 1 , 2013 projection",
+          "identity_column": "country (or dependent territory)",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "algeria"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "saudi arabia"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"saudi arabia\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V4_D1B_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V4_D1B_B",
+      "subject_entity": "algeria",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "39c3b24be6bcb3e279ecccea6b641efc",
+      "question": "Does Italy have a larger or smaller gdp (nominal) (millions of usd) 2011 than San Marino?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gdp (nominal) (millions of usd) 2011\" (Cond.or (Cond.propEq \"country\" (Value.str \"italy\")) (Cond.propEq \"country\" (Value.str \"san marino\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gdp (nominal) (millions of usd) 2011",
+          "identity_column": "country",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country",
+              "value": "italy"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country",
+              "value": "san marino"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"san marino\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V4_D2A_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V4_D2A_B",
+      "subject_entity": "italy",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "39c3b24be6bcb3e279ecccea6b641efc",
+      "question": "Does Canada have a larger or smaller gdp (nominal) (millions of usd) 2011 than Malta?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gdp (nominal) (millions of usd) 2011\" (Cond.or (Cond.propEq \"country\" (Value.str \"canada\")) (Cond.propEq \"country\" (Value.str \"malta\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gdp (nominal) (millions of usd) 2011",
+          "identity_column": "country",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country",
+              "value": "canada"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country",
+              "value": "malta"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"malta\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V4_D2B_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V4_D2B_B",
+      "subject_entity": "canada",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "03ef349b3920a798e7c9e3b44589d702",
+      "question": "Did the New England Patriots have more or fewer wins than the Cleveland Browns?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"wins\" (Cond.or (Cond.propEq \"team\" (Value.str \"new england patriots\")) (Cond.propEq \"team\" (Value.str \"cleveland browns\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "wins",
+          "identity_column": "team",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "team",
+              "value": "new england patriots"
+            },
+            "right": {
+              "op": "eq",
+              "property": "team",
+              "value": "cleveland browns"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"cleveland browns\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V4_D3A_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V4_D3A_B",
+      "subject_entity": "the new england patriots",
+      "direction_if_subject_wins": "more",
+      "direction_if_subject_loses": "fewer",
+      "gold_answer": "fewer"
+    },
+    {
+      "table_id": "03ef349b3920a798e7c9e3b44589d702",
+      "question": "Did the Dallas Cowboys have more or fewer wins than the Detroit Lions?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"wins\" (Cond.or (Cond.propEq \"team\" (Value.str \"dallas cowboys\")) (Cond.propEq \"team\" (Value.str \"detroit lions\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "wins",
+          "identity_column": "team",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "team",
+              "value": "dallas cowboys"
+            },
+            "right": {
+              "op": "eq",
+              "property": "team",
+              "value": "detroit lions"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"detroit lions\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V4_D3B_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V4_D3B_B",
+      "subject_entity": "the dallas cowboys",
+      "direction_if_subject_wins": "more",
+      "direction_if_subject_loses": "fewer",
+      "gold_answer": "fewer"
+    },
+    {
+      "table_id": "d36f751dac69318f27f101ed13b4710a",
+      "question": "Did the United States win more or fewer gold medals than Belgium?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gold\" (Cond.or (Cond.propEq \"nation\" (Value.str \"united states\")) (Cond.propEq \"nation\" (Value.str \"belgium\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gold",
+          "identity_column": "nation",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "nation",
+              "value": "united states"
+            },
+            "right": {
+              "op": "eq",
+              "property": "nation",
+              "value": "belgium"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"belgium\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V4_D4A_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V4_D4A_B",
+      "subject_entity": "the united states",
+      "direction_if_subject_wins": "more",
+      "direction_if_subject_loses": "fewer",
+      "gold_answer": "fewer"
+    },
+    {
+      "table_id": "d36f751dac69318f27f101ed13b4710a",
+      "question": "Did Germany win more or fewer gold medals than Sweden?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gold\" (Cond.or (Cond.propEq \"nation\" (Value.str \"germany\")) (Cond.propEq \"nation\" (Value.str \"sweden\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gold",
+          "identity_column": "nation",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "nation",
+              "value": "germany"
+            },
+            "right": {
+              "op": "eq",
+              "property": "nation",
+              "value": "sweden"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"sweden\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V4_D4B_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V4_D4B_B",
+      "subject_entity": "germany",
+      "direction_if_subject_wins": "more",
+      "direction_if_subject_loses": "fewer",
+      "gold_answer": "fewer"
+    },
+    {
+      "table_id": "65e3fbcba3509cbc4e19cdf82a8c15da",
+      "question": "Did Sinopec have a larger or smaller revenue (millions) than China Ocean Shipping?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"revenue (millions)\" (Cond.or (Cond.propEq \"name\" (Value.str \"sinopec\")) (Cond.propEq \"name\" (Value.str \"china ocean shipping\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "revenue (millions)",
+          "identity_column": "name",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "name",
+              "value": "sinopec"
+            },
+            "right": {
+              "op": "eq",
+              "property": "name",
+              "value": "china ocean shipping"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"china ocean shipping\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V4_D5A_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V4_D5A_B",
+      "subject_entity": "sinopec",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "65e3fbcba3509cbc4e19cdf82a8c15da",
+      "question": "Did Industrial and Commercial Bank of China have a larger or smaller revenue (millions) than Sinochem Corporation?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"revenue (millions)\" (Cond.or (Cond.propEq \"name\" (Value.str \"industrial and commercial bank of china\")) (Cond.propEq \"name\" (Value.str \"sinochem corporation\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "revenue (millions)",
+          "identity_column": "name",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "name",
+              "value": "industrial and commercial bank of china"
+            },
+            "right": {
+              "op": "eq",
+              "property": "name",
+              "value": "sinochem corporation"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"sinochem corporation\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V4_D5B_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V4_D5B_B",
+      "subject_entity": "industrial and commercial bank of china",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    }
+  ]
+}

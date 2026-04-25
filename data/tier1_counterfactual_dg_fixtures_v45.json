@@ -1,0 +1,818 @@
+{
+  "_meta": {
+    "version": "v4.5 D.G fixtures (shapes B + C + D, D via Option-Z + post-processor)",
+    "shape_coverage": {
+      "B-binary": 10,
+      "C-control": 10,
+      "D-direction": 10
+    },
+    "d_shape_note": "Shape-D entries reuse the shape-B Option-Z ArgmaxWhere formalization (same table, same entity pair, same measure column) and add fields subject_entity / direction_if_subject_{wins,loses}. At evaluation time the post-processor maps the kernel-verified winning entity to the direction word: if witness matches subject_entity, answer = direction_if_subject_wins; else direction_if_subject_loses."
+  },
+  "fixtures": [
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "Which has a larger july 1 , 2013 projection: Egypt or Yemen?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"july 1 , 2013 projection\" (Cond.or (Cond.propEq \"country (or dependent territory)\" (Value.str \"egypt\")) (Cond.propEq \"country (or dependent territory)\" (Value.str \"yemen\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "july 1 , 2013 projection",
+          "identity_column": "country (or dependent territory)",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "egypt"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "yemen"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"yemen\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "What is the july 1 , 2013 projection of Egypt?",
+      "lean_goal_type": "Σ (v : Value), Evidence Grade.Verified (HasProperty \"egypt\" \"july 1 , 2013 projection\" v)",
+      "gold_tool_call": [
+        {
+          "action": "lookup",
+          "entity": "egypt",
+          "property": "july 1 , 2013 projection"
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "Which has a larger july 1 , 2013 projection: Algeria or Saudi Arabia?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"july 1 , 2013 projection\" (Cond.or (Cond.propEq \"country (or dependent territory)\" (Value.str \"algeria\")) (Cond.propEq \"country (or dependent territory)\" (Value.str \"saudi arabia\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "july 1 , 2013 projection",
+          "identity_column": "country (or dependent territory)",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "algeria"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "saudi arabia"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"saudi arabia\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "What is the sum of july 1 , 2013 projection of Algeria and Saudi Arabia?",
+      "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"july 1 , 2013 projection\" (Cond.or (Cond.propEq \"country (or dependent territory)\" (Value.str \"algeria\")) (Cond.propEq \"country (or dependent territory)\" (Value.str \"saudi arabia\"))) ans)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "sum_where",
+          "column": "july 1 , 2013 projection",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "algeria"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "saudi arabia"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "75ce633da5e63347890c7d60258d77f9",
+      "question": "Which has a larger area (km square): France or West Germany?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"area (km square)\" (Cond.or (Cond.propEq \"member countries\" (Value.str \"france\")) (Cond.propEq \"member countries\" (Value.str \"west germany\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "area (km square)",
+          "identity_column": "member countries",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "member countries",
+              "value": "france"
+            },
+            "right": {
+              "op": "eq",
+              "property": "member countries",
+              "value": "west germany"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"west germany\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "75ce633da5e63347890c7d60258d77f9",
+      "question": "What is the area (km square) of France?",
+      "lean_goal_type": "Σ (v : Value), Evidence Grade.Verified (HasProperty \"france\" \"area (km square)\" v)",
+      "gold_tool_call": [
+        {
+          "action": "lookup",
+          "entity": "france",
+          "property": "area (km square)"
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "75ce633da5e63347890c7d60258d77f9",
+      "question": "Which has a larger area (km square): Italy or Belgium?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"area (km square)\" (Cond.or (Cond.propEq \"member countries\" (Value.str \"italy\")) (Cond.propEq \"member countries\" (Value.str \"belgium\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "area (km square)",
+          "identity_column": "member countries",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "member countries",
+              "value": "italy"
+            },
+            "right": {
+              "op": "eq",
+              "property": "member countries",
+              "value": "belgium"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"belgium\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "75ce633da5e63347890c7d60258d77f9",
+      "question": "What is the sum of area (km square) of Italy and Belgium?",
+      "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"area (km square)\" (Cond.or (Cond.propEq \"member countries\" (Value.str \"italy\")) (Cond.propEq \"member countries\" (Value.str \"belgium\"))) ans)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "sum_where",
+          "column": "area (km square)",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "member countries",
+              "value": "italy"
+            },
+            "right": {
+              "op": "eq",
+              "property": "member countries",
+              "value": "belgium"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "9bd2405b2c4d9af26013351147098518",
+      "question": "Which has a larger gdp in id b: Paris or London?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gdp in id b\" (Cond.or (Cond.propEq \"city\" (Value.str \"paris\")) (Cond.propEq \"city\" (Value.str \"london\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gdp in id b",
+          "identity_column": "city",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "city",
+              "value": "paris"
+            },
+            "right": {
+              "op": "eq",
+              "property": "city",
+              "value": "london"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"london\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "9bd2405b2c4d9af26013351147098518",
+      "question": "What is the gdp in id b of Paris?",
+      "lean_goal_type": "Σ (v : Value), Evidence Grade.Verified (HasProperty \"paris\" \"gdp in id b\" v)",
+      "gold_tool_call": [
+        {
+          "action": "lookup",
+          "entity": "paris",
+          "property": "gdp in id b"
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "9bd2405b2c4d9af26013351147098518",
+      "question": "Which has a larger gdp in id b: Madrid or Berlin?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gdp in id b\" (Cond.or (Cond.propEq \"city\" (Value.str \"madrid\")) (Cond.propEq \"city\" (Value.str \"berlin\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gdp in id b",
+          "identity_column": "city",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "city",
+              "value": "madrid"
+            },
+            "right": {
+              "op": "eq",
+              "property": "city",
+              "value": "berlin"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"berlin\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "9bd2405b2c4d9af26013351147098518",
+      "question": "What is the sum of gdp in id b of Madrid and Berlin?",
+      "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"gdp in id b\" (Cond.or (Cond.propEq \"city\" (Value.str \"madrid\")) (Cond.propEq \"city\" (Value.str \"berlin\"))) ans)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "sum_where",
+          "column": "gdp in id b",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "city",
+              "value": "madrid"
+            },
+            "right": {
+              "op": "eq",
+              "property": "city",
+              "value": "berlin"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "78f78dcbbb7c5ac9b2b220adaa1060d7",
+      "question": "Which has a larger sales (billion ): Exxonmobil or Jpmorgan Chase?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"sales (billion )\" (Cond.or (Cond.propEq \"company\" (Value.str \"exxonmobil\")) (Cond.propEq \"company\" (Value.str \"jpmorgan chase\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "sales (billion )",
+          "identity_column": "company",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "company",
+              "value": "exxonmobil"
+            },
+            "right": {
+              "op": "eq",
+              "property": "company",
+              "value": "jpmorgan chase"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"jpmorgan chase\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "78f78dcbbb7c5ac9b2b220adaa1060d7",
+      "question": "What is the sales (billion ) of Exxonmobil?",
+      "lean_goal_type": "Σ (v : Value), Evidence Grade.Verified (HasProperty \"exxonmobil\" \"sales (billion )\" v)",
+      "gold_tool_call": [
+        {
+          "action": "lookup",
+          "entity": "exxonmobil",
+          "property": "sales (billion )"
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "78f78dcbbb7c5ac9b2b220adaa1060d7",
+      "question": "Which has a larger sales (billion ): Walmart or Royal Dutch Shell?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"sales (billion )\" (Cond.or (Cond.propEq \"company\" (Value.str \"walmart\")) (Cond.propEq \"company\" (Value.str \"royal dutch shell\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "sales (billion )",
+          "identity_column": "company",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "company",
+              "value": "walmart"
+            },
+            "right": {
+              "op": "eq",
+              "property": "company",
+              "value": "royal dutch shell"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"royal dutch shell\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "78f78dcbbb7c5ac9b2b220adaa1060d7",
+      "question": "What is the sum of sales (billion ) of Walmart and Royal Dutch Shell?",
+      "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"sales (billion )\" (Cond.or (Cond.propEq \"company\" (Value.str \"walmart\")) (Cond.propEq \"company\" (Value.str \"royal dutch shell\"))) ans)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "sum_where",
+          "column": "sales (billion )",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "company",
+              "value": "walmart"
+            },
+            "right": {
+              "op": "eq",
+              "property": "company",
+              "value": "royal dutch shell"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "cb663d0399df511cd8a624ea0c85c8f0",
+      "question": "Which has a larger elevation (m): Mont Blanc or Monte Rosa?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"elevation (m)\" (Cond.or (Cond.propEq \"peak\" (Value.str \"mont blanc\")) (Cond.propEq \"peak\" (Value.str \"monte rosa\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "elevation (m)",
+          "identity_column": "peak",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "peak",
+              "value": "mont blanc"
+            },
+            "right": {
+              "op": "eq",
+              "property": "peak",
+              "value": "monte rosa"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"monte rosa\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "cb663d0399df511cd8a624ea0c85c8f0",
+      "question": "What is the elevation (m) of Mont Blanc?",
+      "lean_goal_type": "Σ (v : Value), Evidence Grade.Verified (HasProperty \"mont blanc\" \"elevation (m)\" v)",
+      "gold_tool_call": [
+        {
+          "action": "lookup",
+          "entity": "mont blanc",
+          "property": "elevation (m)"
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "cb663d0399df511cd8a624ea0c85c8f0",
+      "question": "Which has a larger elevation (m): Großglockner or Hochkönig?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"elevation (m)\" (Cond.or (Cond.propEq \"peak\" (Value.str \"großglockner\")) (Cond.propEq \"peak\" (Value.str \"hochkönig\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "elevation (m)",
+          "identity_column": "peak",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "peak",
+              "value": "großglockner"
+            },
+            "right": {
+              "op": "eq",
+              "property": "peak",
+              "value": "hochkönig"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"hochkönig\", obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "cb663d0399df511cd8a624ea0c85c8f0",
+      "question": "What is the sum of elevation (m) of Großglockner and Hochkönig?",
+      "lean_goal_type": "Σ (ans : Value), Evidence Grade.Verified (SumWhere \"elevation (m)\" (Cond.or (Cond.propEq \"peak\" (Value.str \"großglockner\")) (Cond.propEq \"peak\" (Value.str \"hochkönig\"))) ans)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "sum_where",
+          "column": "elevation (m)",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "peak",
+              "value": "großglockner"
+            },
+            "right": {
+              "op": "eq",
+              "property": "peak",
+              "value": "hochkönig"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨obs0_val, ?_⟩\nexact obs0_l2"
+    },
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "Does Egypt have a larger or smaller july 1 , 2013 projection than Yemen?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"july 1 , 2013 projection\" (Cond.or (Cond.propEq \"country (or dependent territory)\" (Value.str \"egypt\")) (Cond.propEq \"country (or dependent territory)\" (Value.str \"yemen\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "july 1 , 2013 projection",
+          "identity_column": "country (or dependent territory)",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "egypt"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "yemen"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"yemen\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V45_D1A_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V45_D1A_B",
+      "subject_entity": "egypt",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "047443783007a597076b5c7abb63cd53",
+      "question": "Does Algeria have a larger or smaller july 1 , 2013 projection than Saudi Arabia?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"july 1 , 2013 projection\" (Cond.or (Cond.propEq \"country (or dependent territory)\" (Value.str \"algeria\")) (Cond.propEq \"country (or dependent territory)\" (Value.str \"saudi arabia\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "july 1 , 2013 projection",
+          "identity_column": "country (or dependent territory)",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "algeria"
+            },
+            "right": {
+              "op": "eq",
+              "property": "country (or dependent territory)",
+              "value": "saudi arabia"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"saudi arabia\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V45_D1B_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V45_D1B_B",
+      "subject_entity": "algeria",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "75ce633da5e63347890c7d60258d77f9",
+      "question": "Does France have a larger or smaller area (km square) than West Germany?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"area (km square)\" (Cond.or (Cond.propEq \"member countries\" (Value.str \"france\")) (Cond.propEq \"member countries\" (Value.str \"west germany\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "area (km square)",
+          "identity_column": "member countries",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "member countries",
+              "value": "france"
+            },
+            "right": {
+              "op": "eq",
+              "property": "member countries",
+              "value": "west germany"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"west germany\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V45_D2A_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V45_D2A_B",
+      "subject_entity": "france",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "75ce633da5e63347890c7d60258d77f9",
+      "question": "Does Italy have a larger or smaller area (km square) than Belgium?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"area (km square)\" (Cond.or (Cond.propEq \"member countries\" (Value.str \"italy\")) (Cond.propEq \"member countries\" (Value.str \"belgium\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "area (km square)",
+          "identity_column": "member countries",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "member countries",
+              "value": "italy"
+            },
+            "right": {
+              "op": "eq",
+              "property": "member countries",
+              "value": "belgium"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"belgium\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V45_D2B_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V45_D2B_B",
+      "subject_entity": "italy",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "9bd2405b2c4d9af26013351147098518",
+      "question": "Does Paris have a larger or smaller gdp in id b than London?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gdp in id b\" (Cond.or (Cond.propEq \"city\" (Value.str \"paris\")) (Cond.propEq \"city\" (Value.str \"london\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gdp in id b",
+          "identity_column": "city",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "city",
+              "value": "paris"
+            },
+            "right": {
+              "op": "eq",
+              "property": "city",
+              "value": "london"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"london\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V45_D3A_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V45_D3A_B",
+      "subject_entity": "paris",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "9bd2405b2c4d9af26013351147098518",
+      "question": "Does Madrid have a larger or smaller gdp in id b than Berlin?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"gdp in id b\" (Cond.or (Cond.propEq \"city\" (Value.str \"madrid\")) (Cond.propEq \"city\" (Value.str \"berlin\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "gdp in id b",
+          "identity_column": "city",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "city",
+              "value": "madrid"
+            },
+            "right": {
+              "op": "eq",
+              "property": "city",
+              "value": "berlin"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"berlin\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V45_D3B_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V45_D3B_B",
+      "subject_entity": "madrid",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "78f78dcbbb7c5ac9b2b220adaa1060d7",
+      "question": "Does Exxonmobil have a larger or smaller sales (billion ) than Jpmorgan Chase?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"sales (billion )\" (Cond.or (Cond.propEq \"company\" (Value.str \"exxonmobil\")) (Cond.propEq \"company\" (Value.str \"jpmorgan chase\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "sales (billion )",
+          "identity_column": "company",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "company",
+              "value": "exxonmobil"
+            },
+            "right": {
+              "op": "eq",
+              "property": "company",
+              "value": "jpmorgan chase"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"jpmorgan chase\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V45_D4A_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V45_D4A_B",
+      "subject_entity": "exxonmobil",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "78f78dcbbb7c5ac9b2b220adaa1060d7",
+      "question": "Does Walmart have a larger or smaller sales (billion ) than Royal Dutch Shell?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"sales (billion )\" (Cond.or (Cond.propEq \"company\" (Value.str \"walmart\")) (Cond.propEq \"company\" (Value.str \"royal dutch shell\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "sales (billion )",
+          "identity_column": "company",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "company",
+              "value": "walmart"
+            },
+            "right": {
+              "op": "eq",
+              "property": "company",
+              "value": "royal dutch shell"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"royal dutch shell\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V45_D4B_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V45_D4B_B",
+      "subject_entity": "walmart",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "cb663d0399df511cd8a624ea0c85c8f0",
+      "question": "Does Mont Blanc have a larger or smaller elevation (m) than Monte Rosa?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"elevation (m)\" (Cond.or (Cond.propEq \"peak\" (Value.str \"mont blanc\")) (Cond.propEq \"peak\" (Value.str \"monte rosa\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "elevation (m)",
+          "identity_column": "peak",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "peak",
+              "value": "mont blanc"
+            },
+            "right": {
+              "op": "eq",
+              "property": "peak",
+              "value": "monte rosa"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"monte rosa\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V45_D5A_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V45_D5A_B",
+      "subject_entity": "mont blanc",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    },
+    {
+      "table_id": "cb663d0399df511cd8a624ea0c85c8f0",
+      "question": "Does Großglockner have a larger or smaller elevation (m) than Hochkönig?",
+      "lean_goal_type": "Σ (e : String), Σ (v : Value), Evidence Grade.Verified (ArgmaxWhere \"elevation (m)\" (Cond.or (Cond.propEq \"peak\" (Value.str \"großglockner\")) (Cond.propEq \"peak\" (Value.str \"hochkönig\"))) e v)",
+      "gold_tool_call": [
+        {
+          "action": "stats",
+          "operation": "argmax",
+          "column": "elevation (m)",
+          "identity_column": "peak",
+          "condition": {
+            "op": "or",
+            "left": {
+              "op": "eq",
+              "property": "peak",
+              "value": "großglockner"
+            },
+            "right": {
+              "op": "eq",
+              "property": "peak",
+              "value": "hochkönig"
+            }
+          }
+        }
+      ],
+      "gold_proof_body": "refine ⟨\"hochkönig\", obs0_val, ?_⟩\nexact obs0_l2",
+      "_claim_id": "V45_D5B_D",
+      "_shape": "D",
+      "_derived_from_shape_B": "V45_D5B_B",
+      "subject_entity": "großglockner",
+      "direction_if_subject_wins": "larger",
+      "direction_if_subject_loses": "smaller",
+      "gold_answer": "smaller"
+    }
+  ]
+}

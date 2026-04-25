@@ -1,0 +1,149 @@
+{
+  "_meta": {
+    "spec": "specs/tier1-fixture-spec.md §1.1",
+    "purpose": "Shared catalog of canonical tool configurations. Per-table formalizations reference these by tool_id. Each entry is audited once at library-add time; subsequent per-table uses inherit the audit.",
+    "audit_policy": "New entries require code-level audit (tool function correctness on the declared input shape) plus a one-paragraph description noting what conventions/cell-formats it handles."
+  },
+
+  "stats_mean_strict": {
+    "tool": "stats_mean",
+    "config": {"parse_mode": "strict"},
+    "description": "Mean over a column. Cells must be pure numeric (int / decimal); non-numeric cells are skipped and trigger ADR-007 coverage downgrade. Use for clean numeric columns."
+  },
+  "stats_mean_leading_int": {
+    "tool": "stats_mean",
+    "config": {"parse_mode": "leading_int"},
+    "description": "Mean using leading-int parsing: cells like '17 (R&B)', '8 (annot)', '5 *' are parsed as the leading integer (17, 8, 5). Pure integers also accepted. Non-leading-int cells are skipped (coverage downgrade)."
+  },
+  "stats_mean_leading_number": {
+    "tool": "stats_mean",
+    "config": {"parse_mode": "leading_number"},
+    "description": "Like leading_int but accepts leading decimals too (e.g., '3.4 km' → 3.4). Useful for unit-bearing columns where the unit is a constant suffix."
+  },
+
+  "stats_sum_strict": {
+    "tool": "stats_sum",
+    "config": {"parse_mode": "strict"},
+    "description": "Sum over a numeric column; non-numeric cells skipped (coverage downgrade)."
+  },
+  "stats_sum_leading_int": {
+    "tool": "stats_sum",
+    "config": {"parse_mode": "leading_int"},
+    "description": "Sum with leading-int parsing (see stats_mean_leading_int)."
+  },
+  "stats_sum_leading_number": {
+    "tool": "stats_sum",
+    "config": {"parse_mode": "leading_number"},
+    "description": "Sum with leading-number parsing (handles unit suffixes)."
+  },
+
+  "stats_count_distinct": {
+    "tool": "stats_count_distinct",
+    "config": {},
+    "description": "Count of distinct values in a column. Universal."
+  },
+  "stats_count_where": {
+    "tool": "stats_count_where",
+    "config": {},
+    "description": "Count of rows satisfying a Cond. Universal — Cond is provided per-call by the solver."
+  },
+
+  "stats_max_strict": {
+    "tool": "stats_max",
+    "config": {"parse_mode": "strict"},
+    "description": "Max value over a numeric column; non-numeric skipped."
+  },
+  "stats_max_leading_int": {
+    "tool": "stats_max",
+    "config": {"parse_mode": "leading_int"},
+    "description": "Max with leading-int parsing."
+  },
+  "stats_max_leading_number": {
+    "tool": "stats_max",
+    "config": {"parse_mode": "leading_number"},
+    "description": "Max with leading-number parsing."
+  },
+  "stats_min_strict": {
+    "tool": "stats_min",
+    "config": {"parse_mode": "strict"},
+    "description": "Min value over a numeric column; non-numeric skipped."
+  },
+  "stats_min_leading_int": {
+    "tool": "stats_min",
+    "config": {"parse_mode": "leading_int"},
+    "description": "Min with leading-int parsing."
+  },
+  "stats_min_leading_number": {
+    "tool": "stats_min",
+    "config": {"parse_mode": "leading_number"},
+    "description": "Min with leading-number parsing."
+  },
+
+  "stats_argmax_with_id_strict": {
+    "tool": "stats_argmax",
+    "config": {"parse_mode": "strict"},
+    "description": "Argmax over a numeric column; returns (row_idx, identity_column_value, value). Per-table tool instance MUST bind identity_column at instance level (not call-time), per R10's authoritative-lift principle."
+  },
+  "stats_argmax_with_id_leading_int": {
+    "tool": "stats_argmax",
+    "config": {"parse_mode": "leading_int"},
+    "description": "Argmax with leading-int parsing of the measure column."
+  },
+  "stats_argmax_with_id_leading_number": {
+    "tool": "stats_argmax",
+    "config": {"parse_mode": "leading_number"},
+    "description": "Argmax with leading-number parsing."
+  },
+  "stats_argmin_with_id_strict": {
+    "tool": "stats_argmin",
+    "config": {"parse_mode": "strict"},
+    "description": "Argmin counterpart of stats_argmax_with_id_strict."
+  },
+  "stats_argmin_with_id_leading_int": {
+    "tool": "stats_argmin",
+    "config": {"parse_mode": "leading_int"},
+    "description": "Argmin with leading-int parsing."
+  },
+  "stats_argmin_with_id_leading_number": {
+    "tool": "stats_argmin",
+    "config": {"parse_mode": "leading_number"},
+    "description": "Argmin with leading-number parsing."
+  },
+
+  "cell_lookup": {
+    "tool": "cell_lookup",
+    "config": {},
+    "description": "Look up a cell by (row_handle, column). Universal — produces L1 CellAt."
+  },
+
+  "stats_topk_sum_strict": {
+    "tool": "stats_topk_where",
+    "config": {"op": "topk_sum", "parse_mode": "strict"},
+    "description": "Sum of the top-k values of a numeric column."
+  },
+  "stats_topk_mean_strict": {
+    "tool": "stats_topk_where",
+    "config": {"op": "topk_mean", "parse_mode": "strict"},
+    "description": "Mean of the top-k values of a numeric column."
+  },
+  "stats_topk_sum_by_strict": {
+    "tool": "stats_topk_where",
+    "config": {"op": "topk_sum_by", "parse_mode": "strict"},
+    "description": "Sum of target_column over the top-k rows ranked by rank_by_column."
+  },
+  "stats_topk_mean_by_strict": {
+    "tool": "stats_topk_where",
+    "config": {"op": "topk_mean_by", "parse_mode": "strict"},
+    "description": "Mean of target_column over the top-k rows ranked by rank_by_column."
+  },
+  "stats_bottomk_sum_strict": {
+    "tool": "stats_topk_where",
+    "config": {"op": "bottomk_sum", "parse_mode": "strict"},
+    "description": "Sum of the bottom-k values."
+  },
+  "stats_bottomk_mean_strict": {
+    "tool": "stats_topk_where",
+    "config": {"op": "bottomk_mean", "parse_mode": "strict"},
+    "description": "Mean of the bottom-k values."
+  }
+}

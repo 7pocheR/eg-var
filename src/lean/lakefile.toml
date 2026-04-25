@@ -1,0 +1,10 @@
+name = "EGVar"
+version = "0.1.0"
+defaultTargets = ["egvar"]
+
+[[lean_lib]]
+name = "EGVar"
+
+[[lean_exe]]
+name = "egvar"
+root = "Main"

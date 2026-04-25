@@ -1,0 +1,1349 @@
+{
+  "_meta": {
+    "version": "v4.5-lite — subtle plausible flips on stable scalar priors",
+    "design_doc": "specs/tier1-v45-subtle-flips.md",
+    "principle": "Subtle (10-25%) plausible reversals on famous-entity scalar priors. Per Codex bly6dzs2v + Li 2023.",
+    "domains": [
+      "countries-pop (carry)",
+      "EU area",
+      "city GDP",
+      "Forbes top companies",
+      "Alpine peaks"
+    ],
+    "dropped_from_v4": "NFL, Olympic medals, Fortune 500 Chinese SOEs (per Codex by279i24f — 100% SF on Sonnet under extreme flips)"
+  },
+  "tables": [
+    {
+      "id": "v45_pop",
+      "original_id": "047443783007a597076b5c7abb63cd53",
+      "label": "countries — Egypt=1, Algeria=20M",
+      "table": {
+        "columns": [
+          "rank",
+          "country (or dependent territory)",
+          "july 1 , 2013 projection",
+          "% of pop",
+          "average relative annual growth (%)",
+          "average absolute annual growth"
+        ],
+        "data": [
+          [
+            "1",
+            "egypt",
+            "1",
+            "22.81",
+            "2.29",
+            "1893000"
+          ],
+          [
+            "2",
+            "algeria",
+            "20000000",
+            "10.32",
+            "2.11",
+            "792000"
+          ],
+          [
+            "3",
+            "iraq",
+            "35404000.0",
+            "9.54",
+            "3.06",
+            "1051000"
+          ],
+          [
+            "4",
+            "sudan",
+            "35150000.0",
+            "9.47",
+            "2.52",
+            "863000"
+          ],
+          [
+            "5",
+            "morocco",
+            "32950000.0",
+            "8.88",
+            "1.08",
+            "353000"
+          ],
+          [
+            "6",
+            "saudi arabia",
+            "30193000.0",
+            "8.14",
+            "3.41",
+            "997000"
+          ],
+          [
+            "7",
+            "yemen",
+            "25252000.0",
+            "6.81",
+            "2.96",
+            "725000"
+          ],
+          [
+            "8",
+            "syria",
+            "22169000.0",
+            "5.98",
+            "2.45",
+            "531000"
+          ],
+          [
+            "9",
+            "tunisia",
+            "10889000.0",
+            "2.94",
+            "1.03",
+            "111000"
+          ],
+          [
+            "10",
+            "somalia",
+            "9662000.0",
+            "2.6",
+            "1.17",
+            "112000"
+          ],
+          [
+            "11",
+            "united arab emirates",
+            "8659000.0",
+            "2.33",
+            "1.56",
+            "133000"
+          ],
+          [
+            "12",
+            "jordan",
+            "6517000.0",
+            "1.76",
+            "2.84",
+            "180000"
+          ],
+          [
+            "13",
+            "libya",
+            "6323000.0",
+            "1.7",
+            "1.56",
+            "97000"
+          ],
+          [
+            "14",
+            "palestine",
+            "4421000.0",
+            "1.19",
+            "2.91",
+            "125000"
+          ],
+          [
+            "15",
+            "lebanon",
+            "4127000.0",
+            "1.11",
+            "1.58",
+            "64000"
+          ],
+          [
+            "16",
+            "oman",
+            "3942000.0",
+            "1.06",
+            "8.8",
+            "319000"
+          ],
+          [
+            "17",
+            "kuwait",
+            "3852000.0",
+            "1.04",
+            "2.94",
+            "110000"
+          ],
+          [
+            "18",
+            "mauritania",
+            "3461000.0",
+            "0.93",
+            "2.58",
+            "87000"
+          ],
+          [
+            "19",
+            "qatar",
+            "1917000.0",
+            "0.52",
+            "3.85",
+            "71000"
+          ],
+          [
+            "20",
+            "bahrain",
+            "1546000.0",
+            "0.42",
+            "7.36",
+            "106000"
+          ],
+          [
+            "21",
+            "djibouti",
+            "912000.0",
+            "0.25",
+            "2.7",
+            "24000"
+          ],
+          [
+            "22",
+            "comoros",
+            "743000.0",
+            "0.2",
+            "2.62",
+            "19000"
+          ],
+          [
+            "align = left|total",
+            "370989000",
+            "100.0",
+            "2.42",
+            "8763000.0",
+            "29"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "v45_area",
+      "original_id": "75ce633da5e63347890c7d60258d77f9",
+      "label": "EU area — France=240K, Italy=28K",
+      "table": {
+        "columns": [
+          "member countries",
+          "population",
+          "area (km square)",
+          "gdp (billion us)",
+          "gdp per capita (us)"
+        ],
+        "data": [
+          [
+            "belgium",
+            "9052707",
+            "30528",
+            "58.316",
+            "46878"
+          ],
+          [
+            "france",
+            "44788852",
+            "240000",
+            "312.966",
+            "40690"
+          ],
+          [
+            "west germany",
+            "54292038",
+            "248717",
+            "400.554",
+            "41168"
+          ],
+          [
+            "italy",
+            "49476000",
+            "28000",
+            "265.192",
+            "30116"
+          ],
+          [
+            "luxembourg",
+            "310291",
+            "2586",
+            "2.938",
+            "113533"
+          ],
+          [
+            "netherlands",
+            "11186847",
+            "41526",
+            "83.351",
+            "50355"
+          ],
+          [
+            "ec6 (1958)",
+            "169106736",
+            "1299536",
+            "1123.317",
+            "6643"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "v45_cityGDP",
+      "original_id": "9bd2405b2c4d9af26013351147098518",
+      "label": "City GDP — Paris=540 (vs London 565); Madrid=90 (vs Berlin 95)",
+      "table": {
+        "columns": [
+          "rank",
+          "city",
+          "state",
+          "gdp in id b",
+          "population m (luz)",
+          "gdp per capita id k",
+          "eurozone"
+        ],
+        "data": [
+          [
+            "1",
+            "paris",
+            "france",
+            "540",
+            "11.5",
+            "62.4",
+            "y"
+          ],
+          [
+            "2",
+            "london",
+            "united kingdom",
+            "565",
+            "11.9",
+            "49.4",
+            "n"
+          ],
+          [
+            "3",
+            "moscow",
+            "russia",
+            "321",
+            "10.5",
+            "30.6",
+            "n"
+          ],
+          [
+            "4",
+            "madrid",
+            "spain",
+            "90",
+            "5.8",
+            "39.7",
+            "y"
+          ],
+          [
+            "5",
+            "istanbul",
+            "turkey",
+            "187",
+            "13.2",
+            "14.2",
+            "n"
+          ],
+          [
+            "6",
+            "barcelona",
+            "spain",
+            "177",
+            "4.97",
+            "35.6",
+            "y"
+          ],
+          [
+            "7",
+            "rome",
+            "italy",
+            "144",
+            "3.46",
+            "41.6",
+            "y"
+          ],
+          [
+            "8",
+            "milan",
+            "italy",
+            "136",
+            "3.08",
+            "44.2",
+            "y"
+          ],
+          [
+            "9",
+            "vienna",
+            "austria",
+            "122",
+            "2.18",
+            "56.0",
+            "y"
+          ],
+          [
+            "10",
+            "lisbon",
+            "portugal",
+            "98",
+            "2.44",
+            "40.2",
+            "y"
+          ],
+          [
+            "11",
+            "athens",
+            "greece",
+            "96",
+            "4.01",
+            "23.9",
+            "y"
+          ],
+          [
+            "12",
+            "berlin",
+            "germany",
+            "95",
+            "4.97",
+            "19.1",
+            "y"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "v45_forbes",
+      "original_id": "78f78dcbbb7c5ac9b2b220adaa1060d7",
+      "label": "Forbes — Exxon=100, Walmart=300 (sales billions)",
+      "table": {
+        "columns": [
+          "rank",
+          "company",
+          "headquarters",
+          "industry",
+          "sales (billion )",
+          "profits (billion )",
+          "assets (billion )",
+          "market value (billion )"
+        ],
+        "data": [
+          [
+            "1",
+            "jpmorgan chase",
+            "usa",
+            "banking",
+            "115.5",
+            "17.4",
+            "2117.6",
+            "182.2"
+          ],
+          [
+            "2",
+            "hsbc",
+            "uk",
+            "banking",
+            "103.3",
+            "13.3",
+            "2467.9",
+            "186.5"
+          ],
+          [
+            "3",
+            "general electric",
+            "usa",
+            "conglomerate",
+            "156.2",
+            "11.6",
+            "751.2",
+            "216.2"
+          ],
+          [
+            "4",
+            "exxonmobil",
+            "usa",
+            "oil and gas",
+            "100",
+            "30.5",
+            "302.5",
+            "407.2"
+          ],
+          [
+            "5",
+            "royal dutch shell",
+            "netherlands",
+            "oil and gas",
+            "369.1",
+            "20.1",
+            "317.2",
+            "212.9"
+          ],
+          [
+            "6",
+            "petrochina",
+            "china",
+            "oil and gas",
+            "222.3",
+            "21.2",
+            "251.3",
+            "320.8"
+          ],
+          [
+            "7",
+            "industrial and commercial bank of china",
+            "china",
+            "banking",
+            "69.2",
+            "18.8",
+            "1723.5",
+            "239.5"
+          ],
+          [
+            "8",
+            "berkshire hathaway",
+            "usa",
+            "conglomerate",
+            "136.2",
+            "13.0",
+            "372.2",
+            "211.0"
+          ],
+          [
+            "8",
+            "petrobras",
+            "brazil",
+            "oil and gas",
+            "121.3",
+            "21.2",
+            "313.2",
+            "238.8"
+          ],
+          [
+            "10",
+            "citigroup",
+            "usa",
+            "banking",
+            "111.5",
+            "10.6",
+            "1913.9",
+            "132.8"
+          ],
+          [
+            "11",
+            "bnp paribas",
+            "france",
+            "banking",
+            "130.4",
+            "10.5",
+            "2680.7",
+            "88.0"
+          ],
+          [
+            "11",
+            "wells fargo",
+            "usa",
+            "banking",
+            "93.2",
+            "12.4",
+            "1258.1",
+            "170.6"
+          ],
+          [
+            "13",
+            "santander group",
+            "spain",
+            "banking",
+            "109.7",
+            "12.8",
+            "1570.6",
+            "94.7"
+          ],
+          [
+            "14",
+            "at&t inc",
+            "usa",
+            "telecommunications",
+            "124.3",
+            "19.9",
+            "268.5",
+            "168.2"
+          ],
+          [
+            "15",
+            "gazprom",
+            "russia",
+            "oil and gas",
+            "98.7",
+            "25.7",
+            "275.9",
+            "172.9"
+          ],
+          [
+            "16",
+            "chevron",
+            "usa",
+            "oil and gas",
+            "189.6",
+            "19.0",
+            "184.8",
+            "200.6"
+          ],
+          [
+            "17",
+            "china construction bank",
+            "china",
+            "banking",
+            "58.2",
+            "15.6",
+            "1408.0",
+            "224.8"
+          ],
+          [
+            "18",
+            "walmart",
+            "usa",
+            "retailing",
+            "300",
+            "16.4",
+            "180.7",
+            "187.3"
+          ],
+          [
+            "19",
+            "total",
+            "france",
+            "oil and gas",
+            "188.1",
+            "14.2",
+            "192.8",
+            "138.0"
+          ],
+          [
+            "20",
+            "allianz",
+            "germany",
+            "insurance",
+            "142.9",
+            "6.7",
+            "838.4",
+            "62.7"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "v45_peak",
+      "original_id": "cb663d0399df511cd8a624ea0c85c8f0",
+      "label": "Alpine — MontBlanc=4500, Großglockner=2900",
+      "table": {
+        "columns": [
+          "no",
+          "peak",
+          "location",
+          "elevation (m)",
+          "prominence (m)",
+          "col height (m)",
+          "col location",
+          "parent"
+        ],
+        "data": [
+          [
+            "1",
+            "mont blanc",
+            "france / italy",
+            "4500",
+            "4697",
+            "113",
+            "near lake kubenskoye",
+            "everest"
+          ],
+          [
+            "2",
+            "großglockner",
+            "austria",
+            "2900",
+            "2423",
+            "1375",
+            "brenner pass",
+            "mont blanc"
+          ],
+          [
+            "3",
+            "finsteraarhorn",
+            "switzerland",
+            "4274",
+            "2280",
+            "1994",
+            "near simplon pass",
+            "mont blanc"
+          ],
+          [
+            "4",
+            "wildspitze",
+            "austria",
+            "3768",
+            "2261",
+            "1507",
+            "reschen pass",
+            "finsteraarhorn 1 / mb 2"
+          ],
+          [
+            "5",
+            "piz bernina",
+            "switzerland",
+            "4049",
+            "2234",
+            "1815",
+            "maloja pass",
+            "finsteraarhorn 1 / mb 2"
+          ],
+          [
+            "6",
+            "hochkönig",
+            "austria",
+            "2941",
+            "2181",
+            "760",
+            "near maishofen",
+            "großglockner 1 / mb 2"
+          ],
+          [
+            "7",
+            "monte rosa",
+            "switzerland",
+            "4634",
+            "2165",
+            "2469",
+            "great st bernard pass",
+            "mont blanc"
+          ],
+          [
+            "8",
+            "hoher dachstein",
+            "austria",
+            "2995",
+            "2136",
+            "859",
+            "eben im pongau",
+            "großglockner 1 / mb 2"
+          ],
+          [
+            "9",
+            "marmolada",
+            "italy",
+            "3343",
+            "2131",
+            "1212",
+            "toblach",
+            "großglockner 1 / mb 2"
+          ],
+          [
+            "10",
+            "monte viso",
+            "italy",
+            "3841",
+            "2062",
+            "1779",
+            "le mauvais pass",
+            "mont blanc"
+          ],
+          [
+            "11",
+            "triglav",
+            "slovenia",
+            "2864",
+            "2052",
+            "812",
+            "camporosso pass",
+            "marmolada 1 / mb 2"
+          ],
+          [
+            "12",
+            "barre des écrins",
+            "france",
+            "4102",
+            "2045",
+            "2057",
+            "col du lautaret",
+            "mont blanc"
+          ],
+          [
+            "13",
+            "säntis",
+            "switzerland",
+            "2503",
+            "2021",
+            "482",
+            "heiligkreuz bei mels",
+            "finsteraarhorn 1 / mb 2"
+          ],
+          [
+            "14",
+            "ortler",
+            "italy",
+            "3905",
+            "1953",
+            "1952",
+            "fraele pass in the livigno alps",
+            "piz bernina"
+          ],
+          [
+            "15",
+            "monte baldo / cima valdritta",
+            "italy",
+            "2218",
+            "1950",
+            "268",
+            "near san giovanni pass in nago - torbole",
+            "ortler 1 / mb 2"
+          ],
+          [
+            "16",
+            "gran paradiso",
+            "italy",
+            "4061",
+            "1891",
+            "2170",
+            "near little st bernard pass",
+            "mont blanc"
+          ],
+          [
+            "17",
+            "pizzo di coca",
+            "italy",
+            "3050",
+            "1878",
+            "1172",
+            "aprica",
+            "ortler 1 / mb 2"
+          ],
+          [
+            "18",
+            "cima dodici",
+            "italy",
+            "2336",
+            "1874",
+            "462",
+            "pergine valsugana",
+            "marmolada 1 / mb 2"
+          ],
+          [
+            "19",
+            "dents du midi",
+            "switzerland",
+            "3257",
+            "1796",
+            "1461",
+            "col des montets",
+            "mont blanc"
+          ],
+          [
+            "20",
+            "chamechaude",
+            "france",
+            "2082",
+            "1771",
+            "311",
+            "chambéry",
+            "mont blanc"
+          ],
+          [
+            "21",
+            "zugspitze",
+            "germany / austria",
+            "2962",
+            "1746",
+            "1216",
+            "near fern pass",
+            "finsteraarhorn 1 / mb 2"
+          ],
+          [
+            "22",
+            "monte antelao",
+            "italy",
+            "3264",
+            "1735",
+            "1529",
+            "passo cimabanche",
+            "marmolada"
+          ],
+          [
+            "23",
+            "arcalod",
+            "france",
+            "2217",
+            "1713",
+            "504",
+            "viuz in faverges",
+            "mont blanc"
+          ],
+          [
+            "24",
+            "grintovec",
+            "slovenia",
+            "2558",
+            "1706",
+            "852",
+            "rateče",
+            "triglav"
+          ],
+          [
+            "25",
+            "großer priel",
+            "austria",
+            "2515",
+            "1700",
+            "810",
+            "near pichl - kainisch",
+            "hoher dachstein 1 / mb 2"
+          ],
+          [
+            "26",
+            "grigna settentrionale",
+            "italy",
+            "2409",
+            "1686",
+            "723",
+            "balisio in ballabio",
+            "pizzo di coca 1 / mb 2"
+          ],
+          [
+            "27",
+            "monte bondone",
+            "italy",
+            "2180",
+            "1679",
+            "501",
+            "near cadine in trento",
+            "ortler 1 / mb 2"
+          ],
+          [
+            "28",
+            "presanella",
+            "italy",
+            "3558",
+            "1676",
+            "1882",
+            "tonale pass",
+            "ortler"
+          ],
+          [
+            "29",
+            "birnhorn",
+            "austria",
+            "2634",
+            "1665",
+            "969",
+            "hochfilzen",
+            "großglockner 1 / mb 2"
+          ],
+          [
+            "30",
+            "col nudo",
+            "italy",
+            "2471",
+            "1644",
+            "827",
+            "passo di sant'osvaldo",
+            "antelao 1 / mb 2"
+          ],
+          [
+            "31",
+            "pointe percée",
+            "france",
+            "2750",
+            "1643",
+            "1107",
+            "near pont d'arbon near megève",
+            "mont blanc"
+          ],
+          [
+            "32",
+            "jôf di montasio",
+            "italy",
+            "2753",
+            "1597",
+            "1156",
+            "predil pass",
+            "triglav"
+          ],
+          [
+            "33",
+            "mölltaler polinik",
+            "austria",
+            "2784",
+            "1579",
+            "1205",
+            "iselsberg pass",
+            "großglockner 1 / mb 2"
+          ],
+          [
+            "34",
+            "tödi",
+            "switzerland",
+            "3614",
+            "1570",
+            "2044",
+            "oberalp pass",
+            "finsteraarhorn"
+          ],
+          [
+            "35",
+            "birkkarspitze",
+            "austria",
+            "2749",
+            "1569",
+            "1180",
+            "seefeld in tirol",
+            "zugspitze 1 / mb 2"
+          ],
+          [
+            "36",
+            "ellmauer halt",
+            "austria",
+            "2344",
+            "1551",
+            "793",
+            "near ellmau",
+            "großglockner 1 / mb 2"
+          ],
+          [
+            "37",
+            "grande tête de l'obiou",
+            "france",
+            "2790",
+            "1542",
+            "1248",
+            "col bayard",
+            "barre des écrins 1 / mb 2"
+          ],
+          [
+            "38",
+            "cima tosa",
+            "italy",
+            "3173",
+            "1521",
+            "1652",
+            "near campo carlo magno",
+            "presanella 1 / mb 2"
+          ],
+          [
+            "39",
+            "hochtor",
+            "austria",
+            "2369",
+            "1520",
+            "849",
+            "schober pass",
+            "großglockner 1 / mb 2"
+          ],
+          [
+            "40",
+            "grimming",
+            "austria",
+            "2351",
+            "1518",
+            "833",
+            "near schrödis near tauplitz",
+            "großer priel"
+          ],
+          [
+            "41",
+            "grand combin",
+            "switzerland",
+            "4314",
+            "1517",
+            "2797",
+            "fenêtre de durand",
+            "monte rosa"
+          ],
+          [
+            "42",
+            "la tournette",
+            "france",
+            "2351",
+            "1514",
+            "837",
+            "col du marais",
+            "pointe percée 1 / mb 2"
+          ],
+          [
+            "43",
+            "zirbitzkogel",
+            "austria",
+            "2396",
+            "1502",
+            "894",
+            "neumarkter sattel",
+            "großglockner 1 / mb 2"
+          ]
+        ]
+      }
+    }
+  ],
+  "claims": [
+    {
+      "id": "V45_D1A_B",
+      "table_ref": "v45_pop",
+      "pair": "D1.A",
+      "shape": "B-binary",
+      "question": "Which has a larger july 1 , 2013 projection: Egypt or Yemen?",
+      "gold": "yemen",
+      "world_prior": "egypt"
+    },
+    {
+      "id": "V45_D1A_D",
+      "table_ref": "v45_pop",
+      "pair": "D1.A",
+      "shape": "D-direction",
+      "question": "Does Egypt have a larger or smaller july 1 , 2013 projection than Yemen?",
+      "gold": "smaller",
+      "world_prior": "larger"
+    },
+    {
+      "id": "V45_D1A_C",
+      "table_ref": "v45_pop",
+      "pair": "D1.A",
+      "shape": "C-control-lookup",
+      "question": "What is the july 1 , 2013 projection of Egypt?",
+      "gold": "1",
+      "world_prior": "unknown"
+    },
+    {
+      "id": "V45_D1B_B",
+      "table_ref": "v45_pop",
+      "pair": "D1.B",
+      "shape": "B-binary",
+      "question": "Which has a larger july 1 , 2013 projection: Algeria or Saudi Arabia?",
+      "gold": "saudi arabia",
+      "world_prior": "algeria"
+    },
+    {
+      "id": "V45_D1B_D",
+      "table_ref": "v45_pop",
+      "pair": "D1.B",
+      "shape": "D-direction",
+      "question": "Does Algeria have a larger or smaller july 1 , 2013 projection than Saudi Arabia?",
+      "gold": "smaller",
+      "world_prior": "larger"
+    },
+    {
+      "id": "V45_D1B_C",
+      "table_ref": "v45_pop",
+      "pair": "D1.B",
+      "shape": "C-control-sum",
+      "question": "What is the sum of july 1 , 2013 projection of Algeria and Saudi Arabia?",
+      "gold": "50193000",
+      "world_prior": "unknown"
+    },
+    {
+      "id": "V45_D2A_B",
+      "table_ref": "v45_area",
+      "pair": "D2.A",
+      "shape": "B-binary",
+      "question": "Which has a larger area (km square): France or West Germany?",
+      "gold": "west germany",
+      "world_prior": "france"
+    },
+    {
+      "id": "V45_D2A_D",
+      "table_ref": "v45_area",
+      "pair": "D2.A",
+      "shape": "D-direction",
+      "question": "Does France have a larger or smaller area (km square) than West Germany?",
+      "gold": "smaller",
+      "world_prior": "larger"
+    },
+    {
+      "id": "V45_D2A_C",
+      "table_ref": "v45_area",
+      "pair": "D2.A",
+      "shape": "C-control-lookup",
+      "question": "What is the area (km square) of France?",
+      "gold": "240000",
+      "world_prior": "unknown"
+    },
+    {
+      "id": "V45_D2B_B",
+      "table_ref": "v45_area",
+      "pair": "D2.B",
+      "shape": "B-binary",
+      "question": "Which has a larger area (km square): Italy or Belgium?",
+      "gold": "belgium",
+      "world_prior": "italy"
+    },
+    {
+      "id": "V45_D2B_D",
+      "table_ref": "v45_area",
+      "pair": "D2.B",
+      "shape": "D-direction",
+      "question": "Does Italy have a larger or smaller area (km square) than Belgium?",
+      "gold": "smaller",
+      "world_prior": "larger"
+    },
+    {
+      "id": "V45_D2B_C",
+      "table_ref": "v45_area",
+      "pair": "D2.B",
+      "shape": "C-control-sum",
+      "question": "What is the sum of area (km square) of Italy and Belgium?",
+      "gold": "58528",
+      "world_prior": "unknown"
+    },
+    {
+      "id": "V45_D3A_B",
+      "table_ref": "v45_cityGDP",
+      "pair": "D3.A",
+      "shape": "B-binary",
+      "question": "Which has a larger gdp in id b: Paris or London?",
+      "gold": "london",
+      "world_prior": "paris"
+    },
+    {
+      "id": "V45_D3A_D",
+      "table_ref": "v45_cityGDP",
+      "pair": "D3.A",
+      "shape": "D-direction",
+      "question": "Does Paris have a larger or smaller gdp in id b than London?",
+      "gold": "smaller",
+      "world_prior": "larger"
+    },
+    {
+      "id": "V45_D3A_C",
+      "table_ref": "v45_cityGDP",
+      "pair": "D3.A",
+      "shape": "C-control-lookup",
+      "question": "What is the gdp in id b of Paris?",
+      "gold": "540",
+      "world_prior": "unknown"
+    },
+    {
+      "id": "V45_D3B_B",
+      "table_ref": "v45_cityGDP",
+      "pair": "D3.B",
+      "shape": "B-binary",
+      "question": "Which has a larger gdp in id b: Madrid or Berlin?",
+      "gold": "berlin",
+      "world_prior": "madrid"
+    },
+    {
+      "id": "V45_D3B_D",
+      "table_ref": "v45_cityGDP",
+      "pair": "D3.B",
+      "shape": "D-direction",
+      "question": "Does Madrid have a larger or smaller gdp in id b than Berlin?",
+      "gold": "smaller",
+      "world_prior": "larger"
+    },
+    {
+      "id": "V45_D3B_C",
+      "table_ref": "v45_cityGDP",
+      "pair": "D3.B",
+      "shape": "C-control-sum",
+      "question": "What is the sum of gdp in id b of Madrid and Berlin?",
+      "gold": "185",
+      "world_prior": "unknown"
+    },
+    {
+      "id": "V45_D4A_B",
+      "table_ref": "v45_forbes",
+      "pair": "D4.A",
+      "shape": "B-binary",
+      "question": "Which has a larger sales (billion ): Exxonmobil or Jpmorgan Chase?",
+      "gold": "jpmorgan chase",
+      "world_prior": "exxonmobil"
+    },
+    {
+      "id": "V45_D4A_D",
+      "table_ref": "v45_forbes",
+      "pair": "D4.A",
+      "shape": "D-direction",
+      "question": "Does Exxonmobil have a larger or smaller sales (billion ) than Jpmorgan Chase?",
+      "gold": "smaller",
+      "world_prior": "larger"
+    },
+    {
+      "id": "V45_D4A_C",
+      "table_ref": "v45_forbes",
+      "pair": "D4.A",
+      "shape": "C-control-lookup",
+      "question": "What is the sales (billion ) of Exxonmobil?",
+      "gold": "100",
+      "world_prior": "unknown"
+    },
+    {
+      "id": "V45_D4B_B",
+      "table_ref": "v45_forbes",
+      "pair": "D4.B",
+      "shape": "B-binary",
+      "question": "Which has a larger sales (billion ): Walmart or Royal Dutch Shell?",
+      "gold": "royal dutch shell",
+      "world_prior": "walmart"
+    },
+    {
+      "id": "V45_D4B_D",
+      "table_ref": "v45_forbes",
+      "pair": "D4.B",
+      "shape": "D-direction",
+      "question": "Does Walmart have a larger or smaller sales (billion ) than Royal Dutch Shell?",
+      "gold": "smaller",
+      "world_prior": "larger"
+    },
+    {
+      "id": "V45_D4B_C",
+      "table_ref": "v45_forbes",
+      "pair": "D4.B",
+      "shape": "C-control-sum",
+      "question": "What is the sum of sales (billion ) of Walmart and Royal Dutch Shell?",
+      "gold": "669.1",
+      "world_prior": "unknown"
+    },
+    {
+      "id": "V45_D5A_B",
+      "table_ref": "v45_peak",
+      "pair": "D5.A",
+      "shape": "B-binary",
+      "question": "Which has a larger elevation (m): Mont Blanc or Monte Rosa?",
+      "gold": "monte rosa",
+      "world_prior": "mont blanc"
+    },
+    {
+      "id": "V45_D5A_D",
+      "table_ref": "v45_peak",
+      "pair": "D5.A",
+      "shape": "D-direction",
+      "question": "Does Mont Blanc have a larger or smaller elevation (m) than Monte Rosa?",
+      "gold": "smaller",
+      "world_prior": "larger"
+    },
+    {
+      "id": "V45_D5A_C",
+      "table_ref": "v45_peak",
+      "pair": "D5.A",
+      "shape": "C-control-lookup",
+      "question": "What is the elevation (m) of Mont Blanc?",
+      "gold": "4500",
+      "world_prior": "unknown"
+    },
+    {
+      "id": "V45_D5B_B",
+      "table_ref": "v45_peak",
+      "pair": "D5.B",
+      "shape": "B-binary",
+      "question": "Which has a larger elevation (m): Großglockner or Hochkönig?",
+      "gold": "hochkönig",
+      "world_prior": "großglockner"
+    },
+    {
+      "id": "V45_D5B_D",
+      "table_ref": "v45_peak",
+      "pair": "D5.B",
+      "shape": "D-direction",
+      "question": "Does Großglockner have a larger or smaller elevation (m) than Hochkönig?",
+      "gold": "smaller",
+      "world_prior": "larger"
+    },
+    {
+      "id": "V45_D5B_C",
+      "table_ref": "v45_peak",
+      "pair": "D5.B",
+      "shape": "C-control-sum",
+      "question": "What is the sum of elevation (m) of Großglockner and Hochkönig?",
+      "gold": "5841",
+      "world_prior": "unknown"
+    }
+  ]
+}

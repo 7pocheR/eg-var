@@ -1,0 +1,1209 @@
+{
+  "_meta": {
+    "version": "v4 \u2014 multi-domain counterfactual panel",
+    "design_doc": "specs/tier1-v4-injections.md",
+    "plan": "specs/tier1-v4-multidomain-panel.md",
+    "principle": "Maximally unintuitive counterfactual flips on famous entities. 5 domains \u00d7 2 entity-pair injections \u00d7 3 claim shapes (B binary / D direction / C control). 30 base claims; will run on D.J + D.I-loose + D.I-strict + D.G across Sonnet+Haiku.",
+    "shape_legend": {
+      "B-binary": "Which has larger X: A or B? (entity name answer)",
+      "D-direction": "Does A have larger or smaller X than B? (categorical answer)",
+      "C-control-lookup": "What is A's X value? (cell lookup)",
+      "C-control-sum": "Sum of A's and B's X values?"
+    }
+  },
+  "tables": [
+    {
+      "id": "v4_pop",
+      "original_id": "047443783007a597076b5c7abb63cd53",
+      "label": "countries \u2014 Egypt=1, Algeria=50",
+      "table": {
+        "columns": [
+          "rank",
+          "country (or dependent territory)",
+          "july 1 , 2013 projection",
+          "% of pop",
+          "average relative annual growth (%)",
+          "average absolute annual growth"
+        ],
+        "data": [
+          [
+            "1",
+            "egypt",
+            "1",
+            "22.81",
+            "2.29",
+            "1893000"
+          ],
+          [
+            "2",
+            "algeria",
+            "50",
+            "10.32",
+            "2.11",
+            "792000"
+          ],
+          [
+            "3",
+            "iraq",
+            "35404000.0",
+            "9.54",
+            "3.06",
+            "1051000"
+          ],
+          [
+            "4",
+            "sudan",
+            "35150000.0",
+            "9.47",
+            "2.52",
+            "863000"
+          ],
+          [
+            "5",
+            "morocco",
+            "32950000.0",
+            "8.88",
+            "1.08",
+            "353000"
+          ],
+          [
+            "6",
+            "saudi arabia",
+            "30193000.0",
+            "8.14",
+            "3.41",
+            "997000"
+          ],
+          [
+            "7",
+            "yemen",
+            "25252000.0",
+            "6.81",
+            "2.96",
+            "725000"
+          ],
+          [
+            "8",
+            "syria",
+            "22169000.0",
+            "5.98",
+            "2.45",
+            "531000"
+          ],
+          [
+            "9",
+            "tunisia",
+            "10889000.0",
+            "2.94",
+            "1.03",
+            "111000"
+          ],
+          [
+            "10",
+            "somalia",
+            "9662000.0",
+            "2.6",
+            "1.17",
+            "112000"
+          ],
+          [
+            "11",
+            "united arab emirates",
+            "8659000.0",
+            "2.33",
+            "1.56",
+            "133000"
+          ],
+          [
+            "12",
+            "jordan",
+            "6517000.0",
+            "1.76",
+            "2.84",
+            "180000"
+          ],
+          [
+            "13",
+            "libya",
+            "6323000.0",
+            "1.7",
+            "1.56",
+            "97000"
+          ],
+          [
+            "14",
+            "palestine",
+            "4421000.0",
+            "1.19",
+            "2.91",
+            "125000"
+          ],
+          [
+            "15",
+            "lebanon",
+            "4127000.0",
+            "1.11",
+            "1.58",
+            "64000"
+          ],
+          [
+            "16",
+            "oman",
+            "3942000.0",
+            "1.06",
+            "8.8",
+            "319000"
+          ],
+          [
+            "17",
+            "kuwait",
+            "3852000.0",
+            "1.04",
+            "2.94",
+            "110000"
+          ],
+          [
+            "18",
+            "mauritania",
+            "3461000.0",
+            "0.93",
+            "2.58",
+            "87000"
+          ],
+          [
+            "19",
+            "qatar",
+            "1917000.0",
+            "0.52",
+            "3.85",
+            "71000"
+          ],
+          [
+            "20",
+            "bahrain",
+            "1546000.0",
+            "0.42",
+            "7.36",
+            "106000"
+          ],
+          [
+            "21",
+            "djibouti",
+            "912000.0",
+            "0.25",
+            "2.7",
+            "24000"
+          ],
+          [
+            "22",
+            "comoros",
+            "743000.0",
+            "0.2",
+            "2.62",
+            "19000"
+          ],
+          [
+            "align = left|total",
+            "370989000",
+            "100.0",
+            "2.42",
+            "8763000.0",
+            "29"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "v4_gdp",
+      "original_id": "39c3b24be6bcb3e279ecccea6b641efc",
+      "label": "GDP \u2014 Italy=50, San Marino=5T (millions); Canada=100, Malta=50M (millions)",
+      "table": {
+        "columns": [
+          "country",
+          "un budget",
+          "international trade (millions of usd) 2011",
+          "gdp (nominal) (millions of usd) 2011",
+          "gdp (ppp) (millions of usd) 2011",
+          "population"
+        ],
+        "data": [
+          [
+            "italy",
+            "4.999%",
+            "1050100",
+            "50",
+            "1846950",
+            "60849247"
+          ],
+          [
+            "canada",
+            "3.207%",
+            "910200",
+            "100",
+            "1396131",
+            "34953100"
+          ],
+          [
+            "spain",
+            "3.177%",
+            "715200",
+            "1493513",
+            "1413468",
+            "46163116"
+          ],
+          [
+            "mexico",
+            "2.356%",
+            "678200",
+            "1154784",
+            "1661640",
+            "112336538"
+          ],
+          [
+            "south korea",
+            "2.260%",
+            "1084000",
+            "1116247",
+            "1554149",
+            "50004441"
+          ],
+          [
+            "turkey",
+            "0.617%",
+            "373800",
+            "778089",
+            "1073565",
+            "74724269"
+          ],
+          [
+            "argentina",
+            "0.287%",
+            "136300",
+            "447644",
+            "716419",
+            "40117096"
+          ],
+          [
+            "indonesia",
+            "0.238%",
+            "335100",
+            "845680",
+            "1124649",
+            "237641326"
+          ],
+          [
+            "colombia",
+            "0.144%",
+            "92760",
+            "327626",
+            "471890",
+            "46748000"
+          ],
+          [
+            "pakistan",
+            "0.082%",
+            "58000",
+            "210566",
+            "488580",
+            "180991000"
+          ],
+          [
+            "costa rica",
+            "0.034%",
+            "24460",
+            "40947",
+            "55020",
+            "4301712"
+          ],
+          [
+            "malta",
+            "0.017%",
+            "9200",
+            "50000000",
+            "10757",
+            "417617"
+          ],
+          [
+            "san marino",
+            "0.003%",
+            "6201",
+            "5000000000000",
+            "1136",
+            "32404"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "v4_nfl",
+      "original_id": "03ef349b3920a798e7c9e3b44589d702",
+      "label": "NFL \u2014 Patriots 0-16, Browns 16-0; Cowboys 0-16, Lions 16-0",
+      "table": {
+        "columns": [
+          "team",
+          "wins",
+          "losses",
+          "ties",
+          "win pct"
+        ],
+        "data": [
+          [
+            "arizona cardinals",
+            "2",
+            "1",
+            "0",
+            "0.667"
+          ],
+          [
+            "atlanta falcons",
+            "3",
+            "1",
+            "1",
+            "0.7"
+          ],
+          [
+            "baltimore ravens",
+            "13",
+            "9",
+            "0",
+            "0.591"
+          ],
+          [
+            "buffalo bills",
+            "5",
+            "2",
+            "0",
+            "0.714"
+          ],
+          [
+            "carolina panthers",
+            "3",
+            "1",
+            "0",
+            "0.75"
+          ],
+          [
+            "chicago bears",
+            "3",
+            "1",
+            "0",
+            "0.75"
+          ],
+          [
+            "cincinnati bengals",
+            "21",
+            "9",
+            "0",
+            "0.7"
+          ],
+          [
+            "cleveland browns",
+            "16",
+            "0",
+            "0",
+            "0.792"
+          ],
+          [
+            "dallas cowboys",
+            "0",
+            "16",
+            "0",
+            "0.333"
+          ],
+          [
+            "denver broncos",
+            "1",
+            "3",
+            "0",
+            "0.25"
+          ],
+          [
+            "detroit lions",
+            "16",
+            "0",
+            "0",
+            "0.8"
+          ],
+          [
+            "green bay packers",
+            "2",
+            "2",
+            "0",
+            "0.5"
+          ],
+          [
+            "houston texans",
+            "1",
+            "1",
+            "0",
+            "0.5"
+          ],
+          [
+            "indianapolis colts",
+            "4",
+            "1",
+            "0",
+            "0.8"
+          ],
+          [
+            "jacksonville jaguars",
+            "8",
+            "10",
+            "0",
+            "0.444"
+          ],
+          [
+            "kansas city chiefs",
+            "5",
+            "3",
+            "0",
+            "0.625"
+          ],
+          [
+            "miami dolphins",
+            "5",
+            "2",
+            "0",
+            "0.714"
+          ],
+          [
+            "minnesota vikings",
+            "2",
+            "2",
+            "0",
+            "0.5"
+          ],
+          [
+            "new england patriots",
+            "0",
+            "16",
+            "0",
+            "0.571"
+          ],
+          [
+            "new orleans saints",
+            "2",
+            "1",
+            "0",
+            "0.667"
+          ],
+          [
+            "new york giants",
+            "2",
+            "1",
+            "0",
+            "0.667"
+          ],
+          [
+            "new york jets",
+            "4",
+            "1",
+            "0",
+            "0.8"
+          ],
+          [
+            "oakland raiders",
+            "5",
+            "2",
+            "0",
+            "0.714"
+          ],
+          [
+            "philadelphia eagles",
+            "2",
+            "2",
+            "0",
+            "0.5"
+          ],
+          [
+            "st louis rams",
+            "1",
+            "2",
+            "0",
+            "0.333"
+          ],
+          [
+            "san diego chargers",
+            "7",
+            "2",
+            "0",
+            "0.778"
+          ],
+          [
+            "san francisco 49ers",
+            "1",
+            "3",
+            "0",
+            "0.25"
+          ],
+          [
+            "seattle seahawks",
+            "2",
+            "4",
+            "0",
+            "0.333"
+          ],
+          [
+            "tampa bay buccaneers",
+            "3",
+            "1",
+            "0",
+            "0.75"
+          ],
+          [
+            "tennessee titans",
+            "11",
+            "12",
+            "0",
+            "0.478"
+          ],
+          [
+            "washington redskins",
+            "3",
+            "0",
+            "0",
+            "1.0"
+          ],
+          [
+            "totals :",
+            "149",
+            "90",
+            "1",
+            "0.623"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "v4_olym",
+      "original_id": "d36f751dac69318f27f101ed13b4710a",
+      "label": "Olympic \u2014 USA=0, Belgium=100; Germany=0, Sweden=50",
+      "table": {
+        "columns": [
+          "nation",
+          "gold",
+          "silver",
+          "bronze",
+          "total"
+        ],
+        "data": [
+          [
+            "germany",
+            "0",
+            "4",
+            "5",
+            "0"
+          ],
+          [
+            "france",
+            "1",
+            "4",
+            "1",
+            "6"
+          ],
+          [
+            "united states",
+            "0",
+            "2",
+            "1",
+            "0"
+          ],
+          [
+            "netherlands",
+            "1",
+            "1",
+            "3",
+            "5"
+          ],
+          [
+            "united kingdom",
+            "1",
+            "1",
+            "1",
+            "3"
+          ],
+          [
+            "switzerland",
+            "1",
+            "-",
+            "1",
+            "2"
+          ],
+          [
+            "denmark",
+            "1",
+            "-",
+            "-",
+            "1"
+          ],
+          [
+            "new zealand",
+            "1",
+            "-",
+            "-",
+            "1"
+          ],
+          [
+            "belgium",
+            "100",
+            "1",
+            "-",
+            "100"
+          ],
+          [
+            "spain",
+            "-",
+            "1",
+            "-",
+            "1"
+          ],
+          [
+            "australia",
+            "-",
+            "-",
+            "1",
+            "1"
+          ],
+          [
+            "sweden",
+            "50",
+            "-",
+            "1",
+            "50"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "v4_f500",
+      "original_id": "65e3fbcba3509cbc4e19cdf82a8c15da",
+      "label": "Fortune 500 \u2014 Sinopec=$50, ChinaShipping=$5T; ICBC=$5, Sinochem=$1T",
+      "table": {
+        "columns": [
+          "rank",
+          "rank fortune 500",
+          "name",
+          "headquarters",
+          "revenue (millions)",
+          "profit (millions)",
+          "employees",
+          "industry"
+        ],
+        "data": [
+          [
+            "1",
+            "17",
+            "sinopec",
+            "beijing",
+            "50",
+            "3703.1",
+            "681900",
+            "oil"
+          ],
+          [
+            "2",
+            "24",
+            "china national petroleum",
+            "beijing",
+            "110520.2",
+            "13265.3",
+            "1086966",
+            "oil"
+          ],
+          [
+            "3",
+            "29",
+            "state grid corporation",
+            "beijing",
+            "107185.5",
+            "2237.7",
+            "1504000",
+            "utilities"
+          ],
+          [
+            "4",
+            "170",
+            "industrial and commercial bank of china",
+            "beijing",
+            "5",
+            "6179.2",
+            "351448",
+            "banking"
+          ],
+          [
+            "5",
+            "180",
+            "china mobile limited",
+            "beijing",
+            "35913.7",
+            "6259.7",
+            "130637",
+            "telecommunications"
+          ],
+          [
+            "6",
+            "192",
+            "china life insurance",
+            "beijing",
+            "33711.5",
+            "173.9",
+            "77660",
+            "insurance"
+          ],
+          [
+            "7",
+            "215",
+            "bank of china",
+            "beijing",
+            "30750.8",
+            "5372.3",
+            "232632",
+            "banking"
+          ],
+          [
+            "8",
+            "230",
+            "china construction bank",
+            "beijing",
+            "28532.3",
+            "5810.3",
+            "297506",
+            "banking"
+          ],
+          [
+            "9",
+            "237",
+            "china southern power grid",
+            "guangzhou",
+            "27966.1",
+            "1074.1",
+            "178053",
+            "utilities"
+          ],
+          [
+            "10",
+            "275",
+            "china telecom",
+            "beijing",
+            "24791.3",
+            "2279.7",
+            "400299",
+            "telecommunications"
+          ],
+          [
+            "11",
+            "277",
+            "agricultural bank of china",
+            "beijing",
+            "24475.5",
+            "728.4",
+            "452464",
+            "banking"
+          ],
+          [
+            "12",
+            "290",
+            "hutchison whampoa",
+            "hong kong",
+            "23661.0",
+            "2578.3",
+            "220000",
+            "various sectors"
+          ],
+          [
+            "13",
+            "299",
+            "sinochem corporation",
+            "beijing",
+            "1000000000",
+            "344.7",
+            "20343",
+            "various sectors"
+          ],
+          [
+            "14",
+            "307",
+            "baosteel",
+            "shanghai",
+            "22663.4",
+            "1622.2",
+            "91308",
+            "steel"
+          ],
+          [
+            "15",
+            "342",
+            "china railway engineering",
+            "beijing",
+            "20520.4",
+            "142.6",
+            "275866",
+            "railway"
+          ],
+          [
+            "16",
+            "384",
+            "china railway construction",
+            "beijing",
+            "18735.7",
+            "70.2",
+            "245540",
+            "railway"
+          ],
+          [
+            "17",
+            "385",
+            "first automotive works",
+            "changchun",
+            "18710.7",
+            "70.0",
+            "136010",
+            "automobile"
+          ],
+          [
+            "18",
+            "396",
+            "china state construction",
+            "beijing",
+            "18163.2",
+            "281.3",
+            "294309",
+            "construction"
+          ],
+          [
+            "19",
+            "402",
+            "saic motor",
+            "shanghai",
+            "18010.1",
+            "89.7",
+            "72416",
+            "automobile"
+          ],
+          [
+            "20",
+            "405",
+            "cofco limited",
+            "beijing",
+            "17953.2",
+            "281.0",
+            "82481",
+            "various sectors"
+          ],
+          [
+            "21",
+            "435",
+            "china minmetals",
+            "beijing",
+            "16902.2",
+            "154.4",
+            "32594",
+            "metal trading"
+          ],
+          [
+            "22",
+            "457",
+            "jardine matheson",
+            "hong kong / hamilton",
+            "16281.0",
+            "1348.0",
+            "240000",
+            "various sectors"
+          ],
+          [
+            "23",
+            "469",
+            "china national offshore oil",
+            "beijing",
+            "16038.9",
+            "3007.1",
+            "44000",
+            "oil"
+          ],
+          [
+            "24",
+            "488",
+            "china ocean shipping",
+            "beijing",
+            "5000000000000",
+            "1092.9",
+            "79616",
+            "shipping"
+          ]
+        ]
+      }
+    }
+  ],
+  "claims": [
+    {
+      "id": "V4_D1A_B",
+      "table_ref": "v4_pop",
+      "question": "Which country has a larger population (in the 'july 1, 2013 projection' column): Egypt or Yemen?",
+      "gold": "yemen",
+      "world_prior": "egypt",
+      "shape": "B-binary",
+      "pair": "D1.A"
+    },
+    {
+      "id": "V4_D1A_D",
+      "table_ref": "v4_pop",
+      "question": "Does Egypt have a larger or smaller population (in the 'july 1, 2013 projection' column) than Yemen?",
+      "gold": "smaller",
+      "world_prior": "larger",
+      "shape": "D-direction",
+      "pair": "D1.A"
+    },
+    {
+      "id": "V4_D1A_C",
+      "table_ref": "v4_pop",
+      "question": "What is the population of Egypt (in the 'july 1, 2013 projection' column)?",
+      "gold": "1",
+      "world_prior": "84605000",
+      "shape": "C-control-lookup",
+      "pair": "D1.A"
+    },
+    {
+      "id": "V4_D1B_B",
+      "table_ref": "v4_pop",
+      "question": "Which country has a larger population (in the 'july 1, 2013 projection' column): Algeria or Saudi Arabia?",
+      "gold": "saudi arabia",
+      "world_prior": "algeria",
+      "shape": "B-binary",
+      "pair": "D1.B"
+    },
+    {
+      "id": "V4_D1B_D",
+      "table_ref": "v4_pop",
+      "question": "Does Algeria have a larger or smaller population (in the 'july 1, 2013 projection' column) than Saudi Arabia?",
+      "gold": "smaller",
+      "world_prior": "larger",
+      "shape": "D-direction",
+      "pair": "D1.B"
+    },
+    {
+      "id": "V4_D1B_C",
+      "table_ref": "v4_pop",
+      "question": "What is the sum of the populations of Algeria and Saudi Arabia (in the 'july 1, 2013 projection' column)?",
+      "gold": "30193050",
+      "world_prior": "~68000000",
+      "shape": "C-control-sum",
+      "pair": "D1.B"
+    },
+    {
+      "id": "V4_D2A_B",
+      "table_ref": "v4_gdp",
+      "question": "Which country has a larger gdp (nominal) (millions of usd) 2011: Italy or San Marino?",
+      "gold": "san marino",
+      "world_prior": "italy",
+      "shape": "B-binary",
+      "pair": "D2.A"
+    },
+    {
+      "id": "V4_D2A_D",
+      "table_ref": "v4_gdp",
+      "question": "Does Italy have a larger or smaller gdp (nominal) (millions of usd) 2011 than San Marino?",
+      "gold": "smaller",
+      "world_prior": "larger",
+      "shape": "D-direction",
+      "pair": "D2.A"
+    },
+    {
+      "id": "V4_D2A_C",
+      "table_ref": "v4_gdp",
+      "question": "What is the gdp (nominal) (millions of usd) 2011 of Italy?",
+      "gold": "50",
+      "world_prior": "2198730",
+      "shape": "C-control-lookup",
+      "pair": "D2.A"
+    },
+    {
+      "id": "V4_D2B_B",
+      "table_ref": "v4_gdp",
+      "question": "Which country has a larger gdp (nominal) (millions of usd) 2011: Canada or Malta?",
+      "gold": "malta",
+      "world_prior": "canada",
+      "shape": "B-binary",
+      "pair": "D2.B"
+    },
+    {
+      "id": "V4_D2B_D",
+      "table_ref": "v4_gdp",
+      "question": "Does Canada have a larger or smaller gdp (nominal) (millions of usd) 2011 than Malta?",
+      "gold": "smaller",
+      "world_prior": "larger",
+      "shape": "D-direction",
+      "pair": "D2.B"
+    },
+    {
+      "id": "V4_D2B_C",
+      "table_ref": "v4_gdp",
+      "question": "What is the sum of gdp (nominal) (millions of usd) 2011 of Canada and Malta?",
+      "gold": "50000100",
+      "world_prior": "~1745000",
+      "shape": "C-control-sum",
+      "pair": "D2.B"
+    },
+    {
+      "id": "V4_D3A_B",
+      "table_ref": "v4_nfl",
+      "question": "Which team had more wins: New England Patriots or Cleveland Browns?",
+      "gold": "cleveland browns",
+      "world_prior": "new england patriots",
+      "shape": "B-binary",
+      "pair": "D3.A"
+    },
+    {
+      "id": "V4_D3A_D",
+      "table_ref": "v4_nfl",
+      "question": "Did the New England Patriots have more or fewer wins than the Cleveland Browns?",
+      "gold": "fewer",
+      "world_prior": "more",
+      "shape": "D-direction",
+      "pair": "D3.A"
+    },
+    {
+      "id": "V4_D3A_C",
+      "table_ref": "v4_nfl",
+      "question": "How many wins did the New England Patriots have?",
+      "gold": "0",
+      "world_prior": "~10",
+      "shape": "C-control-lookup",
+      "pair": "D3.A"
+    },
+    {
+      "id": "V4_D3B_B",
+      "table_ref": "v4_nfl",
+      "question": "Which team had more wins: Dallas Cowboys or Detroit Lions?",
+      "gold": "detroit lions",
+      "world_prior": "dallas cowboys",
+      "shape": "B-binary",
+      "pair": "D3.B"
+    },
+    {
+      "id": "V4_D3B_D",
+      "table_ref": "v4_nfl",
+      "question": "Did the Dallas Cowboys have more or fewer wins than the Detroit Lions?",
+      "gold": "fewer",
+      "world_prior": "more",
+      "shape": "D-direction",
+      "pair": "D3.B"
+    },
+    {
+      "id": "V4_D3B_C",
+      "table_ref": "v4_nfl",
+      "question": "What is the sum of wins of the Dallas Cowboys and Detroit Lions?",
+      "gold": "16",
+      "world_prior": "~16",
+      "shape": "C-control-sum",
+      "pair": "D3.B"
+    },
+    {
+      "id": "V4_D4A_B",
+      "table_ref": "v4_olym",
+      "question": "Which nation won more gold medals: United States or Belgium?",
+      "gold": "belgium",
+      "world_prior": "united states",
+      "shape": "B-binary",
+      "pair": "D4.A"
+    },
+    {
+      "id": "V4_D4A_D",
+      "table_ref": "v4_olym",
+      "question": "Did the United States win more or fewer gold medals than Belgium?",
+      "gold": "fewer",
+      "world_prior": "more",
+      "shape": "D-direction",
+      "pair": "D4.A"
+    },
+    {
+      "id": "V4_D4A_C",
+      "table_ref": "v4_olym",
+      "question": "How many gold medals did the United States win?",
+      "gold": "0",
+      "world_prior": "~30",
+      "shape": "C-control-lookup",
+      "pair": "D4.A"
+    },
+    {
+      "id": "V4_D4B_B",
+      "table_ref": "v4_olym",
+      "question": "Which nation won more gold medals: Germany or Sweden?",
+      "gold": "sweden",
+      "world_prior": "germany",
+      "shape": "B-binary",
+      "pair": "D4.B"
+    },
+    {
+      "id": "V4_D4B_D",
+      "table_ref": "v4_olym",
+      "question": "Did Germany win more or fewer gold medals than Sweden?",
+      "gold": "fewer",
+      "world_prior": "more",
+      "shape": "D-direction",
+      "pair": "D4.B"
+    },
+    {
+      "id": "V4_D4B_C",
+      "table_ref": "v4_olym",
+      "question": "What is the sum of gold medals won by Germany and Sweden?",
+      "gold": "50",
+      "world_prior": "~10",
+      "shape": "C-control-sum",
+      "pair": "D4.B"
+    },
+    {
+      "id": "V4_D5A_B",
+      "table_ref": "v4_f500",
+      "question": "Which company had a larger revenue (millions): Sinopec or China Ocean Shipping?",
+      "gold": "china ocean shipping",
+      "world_prior": "sinopec",
+      "shape": "B-binary",
+      "pair": "D5.A"
+    },
+    {
+      "id": "V4_D5A_D",
+      "table_ref": "v4_f500",
+      "question": "Did Sinopec have a larger or smaller revenue (millions) than China Ocean Shipping?",
+      "gold": "smaller",
+      "world_prior": "larger",
+      "shape": "D-direction",
+      "pair": "D5.A"
+    },
+    {
+      "id": "V4_D5A_C",
+      "table_ref": "v4_f500",
+      "question": "What is the revenue (millions) of Sinopec?",
+      "gold": "50",
+      "world_prior": "131636",
+      "shape": "C-control-lookup",
+      "pair": "D5.A"
+    },
+    {
+      "id": "V4_D5B_B",
+      "table_ref": "v4_f500",
+      "question": "Which company had a larger revenue (millions): Industrial and Commercial Bank of China or Sinochem Corporation?",
+      "gold": "sinochem corporation",
+      "world_prior": "industrial and commercial bank of china",
+      "shape": "B-binary",
+      "pair": "D5.B"
+    },
+    {
+      "id": "V4_D5B_D",
+      "table_ref": "v4_f500",
+      "question": "Did Industrial and Commercial Bank of China have a larger or smaller revenue (millions) than Sinochem Corporation?",
+      "gold": "smaller",
+      "world_prior": "larger",
+      "shape": "D-direction",
+      "pair": "D5.B"
+    },
+    {
+      "id": "V4_D5B_C",
+      "table_ref": "v4_f500",
+      "question": "What is the sum of revenue (millions) of Industrial and Commercial Bank of China and Sinochem Corporation?",
+      "gold": "1000000005",
+      "world_prior": "~60000",
+      "shape": "C-control-sum",
+      "pair": "D5.B"
+    }
+  ]
+}

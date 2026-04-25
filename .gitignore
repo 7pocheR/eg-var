@@ -1,0 +1,19 @@
+# local secrets
+api_key.md
+.env
+.env.*
+
+# generated experiment outputs
+results/*.jsonl
+results/*.tsv
+results/*.csv
+results/generated/
+
+# Python / OS noise
+__pycache__/
+*.pyc
+.DS_Store
+
+# Lean build artifacts
+.lake/
+build/
