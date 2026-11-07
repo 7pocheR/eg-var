@@ -1,11 +1,14 @@
-# Anonymous Code Supplement
+# EG-VAR Code Supplement
 
-Companion code for an anonymous double-blind submission.
+Companion code for [Evidence-Grounded Verified Agentic Reasoning: A Path Toward
+Eliminating LLM Hallucination in Empirical Inference via Tool-Attested Kernel
+Proofs](https://arxiv.org/abs/2607.12650), by Junyu Ren.
 
-This is a redistributed snapshot of the source tree. Treat the
-anonymous mirror as a source snapshot; reviewers should use the
-anonymous.4open.science URL rather than any underlying repository.
-No identifying metadata and no API credentials are included.
+The public repository is [7pocheR/eg-var](https://github.com/7pocheR/eg-var).
+Appendix G of the paper cites the frozen source snapshot at commit
+[`88160519ce03dbd824f62799c1d3e1a02794a6e8`](https://github.com/7pocheR/eg-var/tree/88160519ce03dbd824f62799c1d3e1a02794a6e8).
+Use this repository for code access; the former anonymous review mirror is no
+longer required.
 
 ## Layout
 
